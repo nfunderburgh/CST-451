@@ -1,0 +1,35 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+}
+
+
+<h4>Search Form</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SearchResults">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <label class="control-label">Choose a Testanment to search</label>
+            <select class="form-control" id="SelectTestament" name="selectTestament">
+                <option style="display:none"> Select Testament</option>
+                <option>Old Testament</option>
+                <option>New Testament</option>
+                <option>Both</option>
+            </select>
+
+            <div class="form-group">
+                <label class="control-label">Search for a verse</label>
+                <input name="searchTerm" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" id="submit-button" value="Search" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
