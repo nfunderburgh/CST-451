@@ -1,5 +1,59 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿<style>
+    .or-separator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .or-text {
+        margin: 0 10px;
+        background-color: white;
+        padding: 0 10px;
+    }
+
+    .or-separator hr {
+            border: none;
+            height: 1px;
+            width: 40%; /* Adjust the width of the hr lines */
+            background-color: #555; /* Darker color for hr */
+        }
+</style>
+
+<div class="container login-container mt-5 mb-4">
+    <h4 class="text-center">Login</h4>
+    <hr />
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <form asp-action="ProcessLogin">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label for="email" class="control-label">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" />
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="control-label">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" />
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Login" class="btn btn-primary btn-block" />
+                </div>
+            </form>
+            <div class="or-separator mt-4 mb-4">
+                <hr />
+                <span class="or-text">or</span>
+                <hr />
+            </div>
+             <div class="text-center">
+                <a href="/Account/ExternalLogin?provider=Google" class="btn btn-primary btn-block">
+                    <i class="fab fa-google mr-2"></i> Login with Google
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
