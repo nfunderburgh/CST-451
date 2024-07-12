@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "wY1v82+PvbnJFFEo2ncHi3hAwO7LV9ffjdf0rHxxrOlsWyc6RNcqxdtnYW+GIb9NXIiDGvcmUiQ0ynjPQIWRng==",
+  "dgSpecHash": "PWPw9CCRstDAv0Lq+7neVL+THKH4U8Vs+XvTeqBux9YFoGFlq3duKXVTYB2Nmqf368D8lFwvdF76lgwwCi2bGg==",
   "success": true,
   "projectFilePath": "D:\\Github\\CST-451\\ChristanCrush\\ChristanCrush.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\APR Services\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\7.0.1\\microsoft.extensions.logging.abstractions.7.0.1.nupkg.sha512",
+    "C:\\Users\\APR Services\\.nuget\\packages\\mysqlconnector\\2.3.7\\mysqlconnector.2.3.7.nupkg.sha512",
+    "C:\\Users\\APR Services\\.nuget\\packages\\system.diagnostics.diagnosticsource\\7.0.2\\system.diagnostics.diagnosticsource.7.0.2.nupkg.sha512",
+    "C:\\Users\\APR Services\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -12,6 +12,12 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 
+@media (min-width: 992px) {
+    .navbar-toggler {
+        display: block !important;
+    }
+}
+
 .custom-top-margin {
     margin-top: 20px; /* Adjust as needed */
 }

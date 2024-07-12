@@ -1,0 +1,81 @@
+﻿@model ChristanCrush.Models.UserModel
+
+@{
+    Layout = "_LoggedInLayout";
+}
+
+<style>
+.form-group {
+    margin-bottom: 1rem; /* Default margin */
+}
+
+.form-group.error {
+    margin-bottom: 0; /* No margin when there's an error */
+}
+</style>
+
+<div class="container login-container mt-5 mb-4">
+    <h4 class="text-center">Register</h4>
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <hr />
+            <form asp-action="ProcessRegister">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group mb-2">
+                    <label asp-for="first_name" class="control-label">First Name</label>
+                    <input asp-for="first_name" id="first_name" name="first_name" class="form-control" />
+                    <span asp-validation-for="email" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-2">
+                    <label asp-for="last_name" class="control-label">Last Name</label>
+                    <input asp-for="last_name" id="last_name" name="last_name" class="form-control" />
+                    <span asp-validation-for="last_name" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-2">
+                    <label asp-for="email" class="control-label">Email</label>
+                    <input asp-for="email" id="email" name="email" class="form-control" />
+                    <span asp-validation-for="email" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-2">
+                    <label asp-for="password" class="control-label">Password</label>
+                    <input asp-for="password" id="password" name="password" class="form-control" />
+                    <span asp-validation-for="password" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-2">
+                    <label asp-for="confirm_password" class="control-label">Retype Password</label>
+                    <input asp-for="confirm_password" id="confirm_password" name="confirm_password" class="form-control" />
+                    <span asp-validation-for="confirm_password" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-2">
+                    <label asp-for="date_of_birth" class="control-label">Date of Birth</label>
+                    <div>
+                        <input asp-for="date_of_birth" class="form-control" />
+                        <span asp-validation-for="date_of_birth" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group mb-2">
+                    <label asp-for="gender" class="control-label">Gender</label>
+                    <br />
+                    <div class="btn-group" role="group" aria-label="Gender radio toggle button group">
+                        <input type="radio" class="btn-check" name="Gender" id="genderM" value="M" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="genderM">M</label>
+
+                        <input type="radio" class="btn-check" name="Gender" id="genderF" value="F" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="genderF">F</label>
+                    </div>
+                    <span asp-validation-for="gender" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Register" class="btn btn-primary btn-block" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

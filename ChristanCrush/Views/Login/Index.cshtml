@@ -1,4 +1,6 @@
-﻿<style>
+﻿@model ChristanCrush.Models.UserModel
+
+<style>
     .or-separator {
         display: flex;
         align-items: center;
@@ -14,32 +16,35 @@
     .or-separator hr {
             border: none;
             height: 1px;
-            width: 40%; /* Adjust the width of the hr lines */
-            background-color: #555; /* Darker color for hr */
+            width: 40%;
+            background-color: #555;
         }
 </style>
 
 <div class="container login-container mt-5 mb-4">
     <h4 class="text-center">Login</h4>
-    <hr />
     <div class="row justify-content-center">
         <div class="col-md-4">
+            <hr />
             <form asp-action="ProcessLogin">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label for="email" class="control-label">Email</label>
-                    <input type="email" id="email" name="email" class="form-control" />
-                    <span class="text-danger"></span>
+                    <label asp-for="email" class="control-label">Email</label>
+                    <input asp-for="email" id="email" name="email" class="form-control" />
+                    <span asp-validation-for="email" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label for="password" class="control-label">Password</label>
-                    <input type="password" id="password" name="password" class="form-control" />
-                    <span class="text-danger"></span>
+                    <label asp-for="password" class="control-label">Password</label>
+                    <input asp-for="password" id="password" name="password" class="form-control" />
+                    <span asp-validation-for="password" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Login" class="btn btn-primary btn-block" />
                 </div>
             </form>
+            <div>
+                 <a class="nav-link" asp-area="" asp-controller="Register" asp-action="Index">Register</a>
+            </div>
             <div class="or-separator mt-4 mb-4">
                 <hr />
                 <span class="or-text">or</span>

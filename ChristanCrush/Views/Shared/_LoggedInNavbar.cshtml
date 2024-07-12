@@ -1,0 +1,50 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <!-- Toggler button for mobile and larger screens -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Centered navbar brand -->
+        <div class="d-flex justify-content-center w-100">
+            <a class="navbar-brand" href="#">Christian Crush</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Offcanvas Menu -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasMenuLabel">Hi User,</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="d-flex flex-column">
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5 class="card-title">Profile</h5>
+                    <a class="nav-link" asp-area="" asp-controller="Profile" asp-action="Index">View Profile</a>
+                </div>
+            </div>
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5 class="card-title">Profile</h5>
+                    <a class="nav-link" asp-area="" asp-controller="Matches" asp-action="Index">View Matches</a>
+                </div>
+            </div>
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5 class="card-title">Messages</h5>
+                    <a class="nav-link" asp-area="" asp-controller="Messages" asp-action="Index">View Messages</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
