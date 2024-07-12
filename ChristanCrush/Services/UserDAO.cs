@@ -21,32 +21,25 @@ namespace ChristanCrush.Services
         /// </returns>
         public bool FindUserByEmailAndPasswordValid(UserModel user)
         {
-            bool success = false;
-
-            string sqlStatment = "SELECT * FROM users WHERE email = @email and password = @password";
-
-
-            
+            string sqlStatement = "SELECT password FROM users WHERE email = @email";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                MySqlCommand cmd = new MySqlCommand(sqlStatment, connection);
-                cmd.Parameters.AddWithValue("@EMAIL", user.email);
-                cmd.Parameters.AddWithValue("@PASSWORD", user.password);
+                MySqlCommand cmd = new MySqlCommand(sqlStatement, connection);
+                cmd.Parameters.AddWithValue("@email", user.email);
 
-                try
+                connection.Open();
+                object databaseHashedPassword = cmd.ExecuteScalar();
+
+                if (databaseHashedPassword != null)
                 {
-                    connection.Open();
-                    MySqlDataReader reader = cmd.ExecuteReader();
+                    string hashedPassword = databaseHashedPassword.ToString();
+                    PasswordHasher hasher = new PasswordHasher();
 
-                    if (reader.HasRows)
-                        success = true;
+                    return hasher.VerifyPassword(user.password, hashedPassword);
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                };
-                return success;
+
+                return false;
             }
         }
 
@@ -103,47 +96,64 @@ namespace ChristanCrush.Services
         /// </returns>
         public bool RegisterUserValid(UserModel user)
         {
-
             bool success = false;
 
-            string sqlStatment = "INSERT INTO users (firstname,lastname,email,password,dateofbirth,gender,createdate) VALUES (@firstname,@lastname,@email,@password,@dateofbirth,@gender,@createdate)";
+            if (!IsEmailRegistered(user))
+            {
 
-            PasswordHasher hasher = new PasswordHasher();
-            string hashedPassword = hasher.HashPassword(user.password);
+                string sqlStatment = "INSERT INTO users (firstname,lastname,email,password,dateofbirth,gender,createdate) VALUES (@firstname,@lastname,@email,@password,@dateofbirth,@gender,@createdate)";
 
+                PasswordHasher hasher = new PasswordHasher();
+                string hashedPassword = hasher.HashPassword(user.password);
+
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    MySqlCommand cmd = new MySqlCommand(sqlStatment, connection);
+                    cmd.Parameters.AddWithValue("@FIRSTNAME", user.first_name);
+                    cmd.Parameters.AddWithValue("@LASTNAME", user.last_name);
+                    cmd.Parameters.AddWithValue("@EMAIL", user.email);
+                    cmd.Parameters.AddWithValue("@PASSWORD", hashedPassword);
+                    cmd.Parameters.AddWithValue("@DATEOFBIRTH", user.date_of_birth);
+                    cmd.Parameters.AddWithValue("@GENDER", user.gender);
+                    cmd.Parameters.AddWithValue("@CREATEDATE", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+
+                    try
+                    {
+                        connection.Open();
+                        int result = cmd.ExecuteNonQuery();
+
+                        if (result > 0)
+                        {
+                            success = true;
+                        }
+                        else
+                        {
+                            Debug.WriteLine("Error inserting user into database!");
+                            success = false;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        success = false;
+                    };
+                }
+            }
+            Debug.WriteLine("Email is already used");
+            return success;
+        }
+
+        public bool IsEmailRegistered(UserModel user)
+        {
+            string sqlStatement = "SELECT COUNT(*) FROM users WHERE email = @Email";
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                MySqlCommand cmd = new MySqlCommand(sqlStatment, connection);
-                cmd.Parameters.AddWithValue("@FIRSTNAME", user.first_name);
-                cmd.Parameters.AddWithValue("@LASTNAME", user.last_name);
-                cmd.Parameters.AddWithValue("@EMAIL", user.email);
-                cmd.Parameters.AddWithValue("@PASSWORD", hashedPassword);
-                cmd.Parameters.AddWithValue("@DATEOFBIRTH", user.date_of_birth);
-                cmd.Parameters.AddWithValue("@GENDER", user.gender);
-                cmd.Parameters.AddWithValue("@CREATEDATE", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                MySqlCommand cmd = new MySqlCommand(sqlStatement, connection);
+                cmd.Parameters.AddWithValue("@Email", user.email);
 
-                try
-                {
-                    connection.Open();
-                    int result = cmd.ExecuteNonQuery();
-
-                    if (result > 0)
-                    {
-                        success = true;
-                    }
-                    else
-                    {
-                        Debug.WriteLine("Error inserting user into database!");
-                        success = false;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    success = false;
-                };
-
-                return success;
+                connection.Open();
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+                return count > 0; 
             }
         }
     }

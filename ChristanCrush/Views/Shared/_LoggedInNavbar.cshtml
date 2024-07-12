@@ -4,6 +4,24 @@
 @{
 }
 
+<style>
+
+.text-white {
+    color: white;
+}
+
+.offcanvas-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.offcanvas-title {
+    flex-grow: 1;
+    text-align: center;
+}
+</style>
+
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
@@ -20,9 +38,9 @@
 </nav>
 
 <!-- Offcanvas Menu -->
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasMenuLabel">Hi User,</h5>
+<div class="offcanvas offcanvas-start bg-primary" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+    <div class="offcanvas-header d-flex align-items-center w-100">
+        <h5 class="offcanvas-title mx-auto text-white" id="offcanvasMenuLabel">Hi User,</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
@@ -35,7 +53,7 @@
             </div>
             <div class="card mb-2">
                 <div class="card-body">
-                    <h5 class="card-title">Profile</h5>
+                    <h5 class="card-title">Matches</h5>
                     <a class="nav-link" asp-area="" asp-controller="Matches" asp-action="Index">View Matches</a>
                 </div>
             </div>

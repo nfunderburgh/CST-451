@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "F2FRDsXDrN8dypnTihEUmfUUKqCRjcnCUlFbu7ou5qs=",
+  "Hash": "5nWMcET0IQysEdEau71mgB6icbZe/Xy/yRRfRLaReSg=",
   "Source": "ChristanCrush",
   "BasePath": "_content/ChristanCrush",
   "Mode": "Default",
@@ -51,12 +51,12 @@
       "OriginalItemSpec": "D:\\Github\\CST-451\\ChristanCrush\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\ChristanCrush.bundle.scp.css"
     },
     {
-      "Identity": "D:\\Github\\CST-451\\ChristanCrush\\wwwroot\\css\\site.css",
+      "Identity": "D:\\Github\\CST-451\\ChristanCrush\\wwwroot\\css\\bootstrap.css",
       "SourceId": "ChristanCrush",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Github\\CST-451\\ChristanCrush\\wwwroot\\",
       "BasePath": "_content/ChristanCrush",
-      "RelativePath": "css/site.css",
+      "RelativePath": "css/bootstrap.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -65,7 +65,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\site.css"
+      "OriginalItemSpec": "wwwroot\\css\\bootstrap.css"
     },
     {
       "Identity": "D:\\Github\\CST-451\\ChristanCrush\\wwwroot\\favicon.ico",
