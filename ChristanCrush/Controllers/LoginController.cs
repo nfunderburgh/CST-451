@@ -45,5 +45,12 @@ namespace ChristanCrush.Controllers
                 return View("LoginFailure", user);
             }
         }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            // MyLogger.GetInstance().Info("Logout Success");
+            return RedirectToAction("Index", "Login");
+        }
     }
 }
