@@ -25,15 +25,23 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-        <!-- Toggler button for mobile and larger screens -->
+        
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Centered navbar brand -->
         <div class="d-flex justify-content-center w-100">
             <a class="navbar-brand" href="#">Christian Crush</a>
         </div>
+        <!-- Hidden Start -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarColor01" style="visibility: hidden;">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Login" asp-action="Index">Login</a>
+                </li>
+            </ul>
+        </div>
+        <!-- Hidden Finished -->
     </div>
 </nav>
 

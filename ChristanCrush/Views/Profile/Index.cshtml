@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Create Profile";
+    Layout = "_LoggedInLayout";
+}
+
+<h2>Create Profile</h2>
+<div class="container login-container mt-5 mb-4">
+    <form method="post" enctype="multipart/form-data">
+        <div class="form-group mb-3">
+            <label for="Name" class="control-label">Full Name</label>
+            <input id="Name" name="Name" class="form-control" placeholder="John Doe" />
+            <span class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <label for="Bio" class="control-label">Bio</label>
+            <textarea id="Bio" name="Bio" class="form-control" placeholder="Tell us a little about yourself..."></textarea>
+            <span class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <label for="Interests" class="control-label">Interests</label>
+            <input id="Interests" name="Interests" class="form-control" placeholder="Hiking, Reading, Cooking" />
+            <span class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <label for="ProfilePictureUrl" class="control-label">Profile Picture</label>
+            <input id="ProfilePictureUrl" name="ProfilePictureUrl" type="file" class="form-control" />
+            <span class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

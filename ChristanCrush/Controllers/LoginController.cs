@@ -34,7 +34,7 @@ namespace ChristanCrush.Controllers
 
                 userId = userDAO.FindUserIdByEmailAndPassword(user);
                 //MyLogger.GetInstance().Info("Login Success");
-                return View("LoginSuccess", user);
+                return View("../Explore/Index", user);
             }
             else
             {

@@ -1,0 +1,25 @@
+﻿.or-separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.or-text {
+    margin: 0 10px;
+    background-color: white;
+    padding: 0 10px;
+}
+
+.or-separator hr {
+    border: none;
+    height: 1px;
+    width: 40%;
+    background-color: #555;
+}
+.form-group {
+    margin-bottom: 1rem; /* Default margin */
+}
+
+    .form-group.error {
+        margin-bottom: 0; /* No margin when there's an error */
+    }

@@ -15,6 +15,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\Github\CST-451\ChristanCrush
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/Github/CST-451/ChristanCrush/Views/Explore/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhwbG9yZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Github/CST-451/ChristanCrush/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -33,6 +37,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Github/CST-451/ChristanCrush/Views/Login/LoginSuccess.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cTG9naW5TdWNjZXNzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Github/CST-451/ChristanCrush/Views/Profile/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Github/CST-451/ChristanCrush/Views/Register/Index.cshtml]
