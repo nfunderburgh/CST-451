@@ -17,11 +17,12 @@ namespace ChristanCrush.Controllers
 
             if (email == null)
             {
-                //session "username" variable is not set. Deny access by sending them to the login page
+
                 context.Result = new RedirectResult("/Login");
             }
             else
-            { //do nothing. session proceeds.
+            {
+
             }
         }
     }

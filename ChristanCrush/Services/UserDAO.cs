@@ -9,15 +9,20 @@ namespace ChristanCrush.Services
     {
         String connectionString = "Server=localhost;User ID=root;Password=root;Database=CST_451;";
 
+        
         /// <summary>
-        /// The function FindUserByNameAndPasswordValid checks if a user with a given username and password exists in the
-        /// database.
+        /// The function `FindUserByEmailAndPasswordValid` checks if a user's email and password are
+        /// valid by querying the database for the hashed password and verifying it using a
+        /// PasswordHasher.
         /// </summary>
-        /// <param name="UserModel">A model class that represents a user. It contains properties for the user's username and
-        /// password.</param>
+        /// <param name="UserModel">UserModel is a class that likely contains properties for user
+        /// information such as email and password.</param>
         /// <returns>
-        /// The method is returning a boolean value indicating whether the user with the given username and password exists
-        /// in the database.
+        /// The method `FindUserByEmailAndPasswordValid` returns a boolean value. It returns `true` if
+        /// the user's email and password are valid (i.e., the password provided by the user matches the
+        /// hashed password stored in the database for the corresponding email address), and it returns
+        /// `false` if either the email is not found in the database or the password does not match the
+        /// hashed password.
         /// </returns>
         public bool FindUserByEmailAndPasswordValid(UserModel user)
         {
@@ -43,14 +48,17 @@ namespace ChristanCrush.Services
             }
         }
 
+       
         /// <summary>
-        /// The function FindUserIdByNameAndPassword takes a UserModel object as input and returns the user ID of the user
-        /// with the matching username and password in the database.
+        /// The function FindUserIdByEmailAndPassword searches for a user ID in the database based on
+        /// the provided email and hashed password.
         /// </summary>
-        /// <param name="UserModel">A model class that represents a user. It contains properties for the user's username and
+        /// <param name="UserModel">UserModel is a class that contains the properties email and
         /// password.</param>
         /// <returns>
-        /// The method is returning an integer value, which represents the user ID.
+        /// The method `FindUserIdByEmailAndPassword` is returning an integer value representing the
+        /// user ID found in the database based on the provided email and password in the `UserModel`
+        /// object.
         /// </returns>
         public int FindUserIdByEmailAndPassword(UserModel user)
         {
@@ -85,14 +93,17 @@ namespace ChristanCrush.Services
             return userId;
         }
 
+        
         /// <summary>
-        /// The function `RegisterUserValid` inserts a user into a database table and returns a boolean value indicating
-        /// whether the operation was successful or not.
+        /// The function `RegisterUserValid` checks if a user's email is already registered and inserts
+        /// the user into a database if not.
         /// </summary>
-        /// <param name="UserModel">A model class that represents a user with properties such as FirstName, LastName, Sex,
-        /// Age, State, Email, UserName, and Password.</param>
+        /// <param name="UserModel">It looks like you are trying to register a user in a database using
+        /// the provided UserModel object. The UserModel likely contains properties such as first_name,
+        /// last_name, email, password, date_of_birth, and gender.</param>
         /// <returns>
-        /// The method is returning a boolean value indicating whether the user registration was successful or not.
+        /// The method `RegisterUserValid` returns a boolean value indicating whether the user
+        /// registration was successful (`true`) or not (`false`).
         /// </returns>
         public bool RegisterUserValid(UserModel user)
         {
@@ -143,17 +154,78 @@ namespace ChristanCrush.Services
             return success;
         }
 
-        public bool IsEmailRegistered(UserModel user)
+
+        /// <summary>
+        /// The function `DeleteUserByEmail` deletes a user from a database based on their email
+        /// address.
+        /// </summary>
+        /// <param name="UserModel">UserModel is a class or structure that represents a user in the
+        /// system. It likely contains properties such as email, name, ID, and other relevant
+        /// information about a user. In this context, UserModel is used to pass user information,
+        /// specifically the email address, to the DeleteUserByEmail method for deleting</param>
+        /// <returns>
+        /// The DeleteUserByEmail method returns a boolean value. It returns true if the deletion
+        /// operation was successful and at least one row was affected in the database. Otherwise, it
+        /// returns false if an exception occurred during the deletion process or if no rows were
+        /// affected.
+        /// </returns>
+        public bool DeleteUserByEmail(UserModel user)
         {
-            string sqlStatement = "SELECT COUNT(*) FROM users WHERE email = @Email";
+            string sqlStatement = "DELETE FROM users WHERE email = @Email";
+
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 MySqlCommand cmd = new MySqlCommand(sqlStatement, connection);
                 cmd.Parameters.AddWithValue("@Email", user.email);
 
-                connection.Open();
-                int count = Convert.ToInt32(cmd.ExecuteScalar());
-                return count > 0; 
+                try
+                {
+                    connection.Open();
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+            }
+        }
+        
+        /// <summary>
+        /// The IsEmailRegistered function checks if a given email is already registered in the
+        /// database.
+        /// </summary>
+        /// <param name="UserModel">UserModel is a class or structure that contains information about a
+        /// user. In this case, it likely has a property called "email" which stores the email address
+        /// of the user.</param>
+        /// <returns>
+        /// The IsEmailRegistered method returns a boolean value indicating whether the email provided
+        /// in the UserModel object is already registered in the database. It queries the database to
+        /// check if there are any records with the same email address and returns true if the count is
+        /// greater than 0, indicating that the email is already registered. If an exception occurs
+        /// during the database operation, it catches the exception, prints the error message to
+        /// </returns>
+        public bool IsEmailRegistered(UserModel user)
+        {
+            string sqlStatement = "SELECT COUNT(*) FROM users WHERE email = @Email";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                MySqlCommand cmd = new MySqlCommand(sqlStatement, connection);
+                cmd.Parameters.AddWithValue("@Email", user.email);
+
+                try
+                {
+                    connection.Open();
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    return count > 0;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
             }
         }
     }

@@ -46,6 +46,14 @@
             "MySqlConnector": {
               "target": "Package",
               "version": "[2.3.7, )"
+            },
+            "xunit.assert": {
+              "target": "Package",
+              "version": "[2.9.0, )"
+            },
+            "xunit.extensibility.core": {
+              "target": "Package",
+              "version": "[2.9.0, )"
             }
           },
           "imports": [

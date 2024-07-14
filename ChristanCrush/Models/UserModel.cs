@@ -44,11 +44,27 @@ namespace ChristanCrush.Models
 
         public DateTime created_at { get; set; }
 
+        /// <summary>
+        /// The ToString method returns a string representation of an object's email and password
+        /// properties.
+        /// </summary>
+        /// <returns>
+        /// The `ToString` method is returning a string that concatenates the email and password values
+        /// with the labels "Email = " and " Password = ".
+        /// </returns>
         public override string ToString()
         {
             return "Email = " + email + " Password = " + password;
         }
 
+        /// <summary>
+        /// The function `IsOver18YearsOld` in C# determines if a person is over 18 years old based on
+        /// their date of birth.
+        /// </summary>
+        /// <returns>
+        /// The method `IsOver18YearsOld` returns a boolean value indicating whether the person is over
+        /// 18 years old or not.
+        /// </returns>
         public bool IsOver18YearsOld()
         {
             

@@ -18,17 +18,20 @@ namespace ChristanCrush.Controllers
             return View();
         }
 
+        
+
         /// <summary>
-        /// The function "ProcessRegister" registers a user and returns a view based on the success or failure of the
-        /// registration.
+        /// The ProcessRegister function in C# checks if a user registration is valid and returns a
+        /// success or failure view accordingly.
         /// </summary>
-        /// <param name="UserModel">UserModel is a class that represents the data structure for a user. It contains
-        /// properties such as username, password, email, and other relevant information for user registration.</param>
+        /// <param name="UserModel">A model class that represents a user with properties such as
+        /// username, password, email, etc.</param>
         /// <returns>
-        /// The method is returning an IActionResult. The specific view being returned depends on the result of the
-        /// securityDAO.RegisterUserValid(user) method. If it returns true, the "RegisterSuccess" view is returned with the
-        /// user model as the parameter. If it returns false, the "RegisterFailure" view is returned with the user model as
-        /// the parameter.
+        /// The ProcessRegister method is returning a View based on the result of the RegisterUserValid
+        /// method from the UserDAO class. If the RegisterUserValid method returns true, the method
+        /// returns a View called "RegisterSuccess" with the user model data. If the RegisterUserValid
+        /// method returns false, the method returns a View called "RegisterFailure" with the user model
+        /// data.
         /// </returns>
         //[ServiceFilter(typeof(LogControllerEntryExitFilter))]
         public IActionResult ProcessRegister(UserModel user)

@@ -1,13 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "PWPw9CCRstDAv0Lq+7neVL+THKH4U8Vs+XvTeqBux9YFoGFlq3duKXVTYB2Nmqf368D8lFwvdF76lgwwCi2bGg==",
+  "dgSpecHash": "MTqQeD8NhIWkeuc1EAaSw4TH8SRv8hrEsIiHr+X+XXXll5gzBfHDQi9xP377+FLlLL1JrixS9jQ9vYOLiF94Bw==",
   "success": true,
   "projectFilePath": "D:\\Github\\CST-451\\ChristanCrush\\ChristanCrush.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\APR Services\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\7.0.1\\microsoft.extensions.logging.abstractions.7.0.1.nupkg.sha512",
     "C:\\Users\\APR Services\\.nuget\\packages\\mysqlconnector\\2.3.7\\mysqlconnector.2.3.7.nupkg.sha512",
     "C:\\Users\\APR Services\\.nuget\\packages\\system.diagnostics.diagnosticsource\\7.0.2\\system.diagnostics.diagnosticsource.7.0.2.nupkg.sha512",
-    "C:\\Users\\APR Services\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+    "C:\\Users\\APR Services\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\APR Services\\.nuget\\packages\\xunit.abstractions\\2.0.3\\xunit.abstractions.2.0.3.nupkg.sha512",
+    "C:\\Users\\APR Services\\.nuget\\packages\\xunit.assert\\2.9.0\\xunit.assert.2.9.0.nupkg.sha512",
+    "C:\\Users\\APR Services\\.nuget\\packages\\xunit.extensibility.core\\2.9.0\\xunit.extensibility.core.2.9.0.nupkg.sha512"
   ],
   "logs": []
 }

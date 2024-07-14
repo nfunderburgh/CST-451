@@ -8,11 +8,9 @@ namespace ChristanCrush.Utility
 
         public string HashPassword(string password)
         {
-            // Generate a random salt
             byte[] salt;
             new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
 
-            // Hash password with the generated salt
             using (var sha256 = SHA256.Create())
             {
                 byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
@@ -45,15 +43,14 @@ namespace ChristanCrush.Utility
 
                 byte[] hashedBytes = sha256.ComputeHash(combinedBytes);
 
-                // Compare hashed bytes with stored hashed password bytes
                 for (int i = 0; i < hashedBytes.Length; i++)
                 {
                     if (hashedBytes[i] != hashedPasswordBytes[i])
                     {
-                        return false; // Passwords don't match
+                        return false;
                     }
                 }
-                return true; // Passwords match
+                return true;
             }
         }
     }
