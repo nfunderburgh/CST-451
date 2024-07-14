@@ -47,16 +47,13 @@ namespace ChristanCrush.Tests
         [Fact]
         public void VerifyPasswordWrong()
         {
-            // Arrange
             var passwordHasher = new PasswordHasher();
             string password = "securepassword";
             string hashedPassword = passwordHasher.HashPassword(password);
             string incorrectPassword = "wrongpassword";
 
-            // Act
             bool result = passwordHasher.VerifyPassword(incorrectPassword, hashedPassword);
 
-            // Assert
             Assert.False(result);
         }
     }

@@ -28,6 +28,7 @@ namespace ChristanCrush.Models
 
         [Required]
         [DataType(DataType.Password)]
+        [DisplayName("Retyped Password")]
         [Compare("password", ErrorMessage = "The password and confirmation password do not match.")]
         public string confirm_password { get; set; }
 
