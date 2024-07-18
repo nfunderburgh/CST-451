@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ChristanCrush.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ChristanCrush.Controllers
 {
     public class MessageController : Controller
     {
+
+
         /// <summary>
         /// The Index function in C# is decorated with a CustomAuthorization attribute and returns a
         /// View result.
@@ -14,7 +17,10 @@ namespace ChristanCrush.Controllers
         [CustomAuthorization]
         public IActionResult Index()
         {
-            return View();
+            MessageDAO messageDAO = new MessageDAO();
+            var messages = messageDAO.GetAllMessages();
+
+            return View(messages);
         }
     }
 }

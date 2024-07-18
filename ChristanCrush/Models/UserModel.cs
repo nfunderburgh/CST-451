@@ -5,6 +5,7 @@ namespace ChristanCrush.Models
 {
     public class UserModel
     {
+        [Key]
         public int Id { get; set; }
 
         [Required]

@@ -11,6 +11,7 @@ namespace ChristanCrush.Controllers
 
         public static int userId = 0;
 
+
         /// <summary>
         /// The Index function in C# returns a View result.
         /// </summary>
@@ -36,6 +37,7 @@ namespace ChristanCrush.Controllers
         /// </returns>
         public IActionResult ProcessLogin(UserModel user)
         {
+
             UserDAO userDAO = new UserDAO();
 
             if (userDAO.FindUserByEmailAndPasswordValid(user))

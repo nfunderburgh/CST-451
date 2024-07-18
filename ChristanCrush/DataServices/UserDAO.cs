@@ -9,7 +9,6 @@ namespace ChristanCrush.Services
     {
         String connectionString = "Server=localhost;User ID=root;Password=root;Database=CST_451;";
 
-        
         /// <summary>
         /// The function `FindUserByEmailAndPasswordValid` checks if a user's email and password are
         /// valid by querying the database for the hashed password and verifying it using a
