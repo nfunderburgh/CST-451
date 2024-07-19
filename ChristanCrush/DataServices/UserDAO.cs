@@ -47,7 +47,7 @@ namespace ChristanCrush.Services
             }
         }
 
-       
+
         /// <summary>
         /// The function FindUserIdByEmailAndPassword searches for a user ID in the database based on
         /// the provided email and hashed password.
@@ -59,40 +59,36 @@ namespace ChristanCrush.Services
         /// user ID found in the database based on the provided email and password in the `UserModel`
         /// object.
         /// </returns>
-        public int FindUserIdByEmailAndPassword(UserModel user)
+        public int FindUserIdByEmail(UserModel user)
         {
             int userId = 0;
 
-            string sqlStatment = "SELECT 1 FROM users WHERE email = @email AND password = @password";
-
-            PasswordHasher hasher = new PasswordHasher();
-            string hashedPassword = hasher.HashPassword(user.password);
+            string sqlStatement = "SELECT Id FROM users WHERE email = @EMAIL";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                MySqlCommand cmd = new MySqlCommand(sqlStatment, connection);
+                MySqlCommand cmd = new MySqlCommand(sqlStatement, connection);
                 cmd.Parameters.AddWithValue("@EMAIL", user.email);
-                cmd.Parameters.AddWithValue("@PASSWORD", hashedPassword);
 
                 try
                 {
                     connection.Open();
                     MySqlDataReader reader = cmd.ExecuteReader();
 
-                    while (reader.Read())
+                    if (reader.Read()) // Use if since we expect a single row
                     {
-                        userId = ((int)(long)reader[0]);
+                        userId = reader.GetInt32(0); // Directly get the integer value from the reader
                     }
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
-                };
+                }
             }
             return userId;
         }
 
-        
+
         /// <summary>
         /// The function `RegisterUserValid` checks if a user's email is already registered and inserts
         /// the user into a database if not.

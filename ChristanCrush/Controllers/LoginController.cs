@@ -44,7 +44,8 @@ namespace ChristanCrush.Controllers
             {
                 HttpContext.Session.SetString("email", user.email);
 
-                userId = userDAO.FindUserIdByEmailAndPassword(user);
+                userId = userDAO.FindUserIdByEmail(user);
+                HttpContext.Session.SetString("userId", userId.ToString());
                 //MyLogger.GetInstance().Info("Login Success");
                 return View("../Explore/Index", user);
             }
