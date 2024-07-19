@@ -23,3 +23,16 @@
     .form-group.error {
         margin-bottom: 0; /* No margin when there's an error */
     }
+
+
+.message-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

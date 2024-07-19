@@ -151,5 +151,48 @@ namespace ChristanCrush.Services
 
             return messages;
         }
+
+        public List<MessageModel> GetSenderReceiverMessages(int senderId, int receiverId)
+        {
+            List<MessageModel> messages = new List<MessageModel>();
+            string sqlStatement = "SELECT m.messageid, m.senderid, m.receiverid, m.messagecontext, m.sentat, u.firstname AS sendername " +
+                                  "FROM Messages m " +
+                                  "JOIN Users u ON m.senderid = u.Id " +
+                                  "WHERE (m.senderid = @senderId AND m.receiverid = @receiverId) OR (m.senderid = @receiverId AND m.receiverid = @senderId) " +
+                                  "ORDER BY m.sentat ASC";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                MySqlCommand cmd = new MySqlCommand(sqlStatement, connection);
+                cmd.Parameters.AddWithValue("@senderId", senderId);
+                cmd.Parameters.AddWithValue("@receiverId", receiverId);
+
+                try
+                {
+                    connection.Open();
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            MessageModel message = new MessageModel();
+                            message.MessageId = Convert.ToInt32(reader["messageid"]);
+                            message.SenderId = Convert.ToInt32(reader["senderid"]);
+                            message.ReceiverId = Convert.ToInt32(reader["receiverid"]);
+                            message.MessageContent = reader["messagecontext"].ToString();
+                            message.SentAt = Convert.ToDateTime(reader["sentat"]);
+                            message.SenderName = reader["sendername"].ToString();
+
+                            messages.Add(message);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+
+            return messages;
+        }
     }
 }

@@ -1,35 +1,37 @@
 ﻿@model IEnumerable<ChristanCrush.Models.MessageModel>
 @{
     ViewData["Title"] = "Messaging";
+    Layout = "_LoggedInLayout";
 }
 
+
 <div class="container mt-5">
-    <div class="row">
-        <div class="col-md-8">
-            <h2>Messages</h2>
-            <div id="message-list">
-                @foreach (var message in Model)
-                {
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">@message.SenderName</h5>
-                            <p class="card-text">@message.MessageContent</p>
-                            <p class="card-text"><small class="text-muted">Sent: @message.SentAt</small></p>
+        <div class="row flex-grow-1">
+            <div class="col-md-8 message-container">
+                <h2>Messages</h2>
+                <div id="message-list">
+                    @foreach (var message in Model)
+                    {
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <h8 class="card-title">@message.SenderName</h8>
+                                <p class="card-text">@message.MessageContent</p>
+                                <p class="card-text"><small class="text-muted">Sent: @message.SentAt</small></p>
+                            </div>
                         </div>
+                    }
+                </div>
+            </div>
+            <div class="col-md-8">
+                <h2>Compose Message</h2>
+                <form id="compose-form" asp-action="SendMessage" method="post">
+                    <div class="form-group">
+                        <label for="message">Message:</label>
+                        <textarea class="form-control" id="message" name="MessageContent" rows="3"></textarea>
                     </div>
-                }
+                    <input type="hidden" name="ReceiverId" value="@ViewBag.ReceiverId" />
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </form>
             </div>
         </div>
-        <div class="col-md-4">
-            <h2>Compose Message</h2>
-            <form id="compose-form" asp-action="SendMessage" method="post">
-                <div class="form-group">
-                    <label for="message">Message:</label>
-                    <textarea class="form-control" id="message" name="MessageContent" rows="3"></textarea>
-                </div>
-                <input type="hidden" name="ReceiverId" value="@ViewBag.ReceiverId" />
-                <button type="submit" class="btn btn-primary">Send</button>
-            </form>
-        </div>
-    </div>
 </div>
