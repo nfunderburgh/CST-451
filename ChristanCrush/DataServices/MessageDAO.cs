@@ -12,14 +12,14 @@ namespace ChristanCrush.Services
         {
             bool success = false;
 
-            string sqlStatement = "INSERT INTO messages (senderid, receiverid, messagecontext, sentat) VALUES (@SENDERID, @RECEIVERID, @MESSAGECONTEXT, @SENTAT)";
+            string sqlStatement = "INSERT INTO messages (senderid, receiverid, messagecontent, sentat) VALUES (@SENDERID, @RECEIVERID, @MESSAGECONTENT, @SENTAT)";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 MySqlCommand cmd = new MySqlCommand(sqlStatement, connection);
                 cmd.Parameters.AddWithValue("@SENDERID", message.SenderId);
                 cmd.Parameters.AddWithValue("@RECEIVERID", message.ReceiverId);
-                cmd.Parameters.AddWithValue("@MESSAGECONTEXT", message.MessageContent);
+                cmd.Parameters.AddWithValue("@MESSAGECONTENT", message.MessageContent);
                 cmd.Parameters.AddWithValue("@SENTAT", message.SentAt.ToString("yyyy-MM-dd HH:mm:ss"));
 
                 try
@@ -70,52 +70,10 @@ namespace ChristanCrush.Services
             }
         }
 
-        public List<MessageModel> GetMessages(int senderId, int receiverId)
-        {
-            List<MessageModel> messages = new List<MessageModel>();
-            string sqlStatement = "SELECT messageid, senderid, receiverid, messagecontent, sentat " +
-                                  "FROM messages " +
-                                  "WHERE (senderid = @SENDERID AND receiverid = @RECEIVERID) " +
-                                  "   OR (senderid = @RECEIVERID AND receiverid = @SENDERID) " +
-                                  "ORDER BY sent_at ASC";
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
-            {
-                MySqlCommand cmd = new MySqlCommand(sqlStatement, connection);
-                cmd.Parameters.AddWithValue("@SENDERID", senderId);
-                cmd.Parameters.AddWithValue("@RECEIVERID", receiverId);
-
-                try
-                {
-                    connection.Open();
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            MessageModel message = new MessageModel();
-                            message.MessageId = Convert.ToInt32(reader["messageid"]);
-                            message.SenderId = Convert.ToInt32(reader["senderid"]);
-                            message.ReceiverId = Convert.ToInt32(reader["receiverid"]);
-                            message.MessageContent = reader["messagecontent"].ToString();
-                            message.SentAt = Convert.ToDateTime(reader["sentat"]);
-
-                            messages.Add(message);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            }
-
-            return messages;
-        }
-
         public List<MessageModel> GetAllMessages()
         {
             List<MessageModel> messages = new List<MessageModel>();
-            string sqlStatement = "SELECT m.messageid, m.senderid, m.receiverid, m.messagecontext, m.sentat, u.firstname AS sendername " +
+            string sqlStatement = "SELECT m.messageid, m.senderid, m.receiverid, m.messagecontent, m.sentat, u.firstname AS sendername " +
                                   "FROM Messages m " +
                                   "JOIN Users u ON m.senderid = u.Id " +
                                   "ORDER BY m.sentat ASC";
@@ -135,7 +93,7 @@ namespace ChristanCrush.Services
                             message.MessageId = Convert.ToInt32(reader["messageid"]);
                             message.SenderId = Convert.ToInt32(reader["senderid"]);
                             message.ReceiverId = Convert.ToInt32(reader["receiverid"]);
-                            message.MessageContent = reader["messagecontext"].ToString();
+                            message.MessageContent = reader["messagecontent"].ToString();
                             message.SentAt = Convert.ToDateTime(reader["sentat"]);
                             message.SenderName = reader["sendername"].ToString();
 
@@ -155,7 +113,7 @@ namespace ChristanCrush.Services
         public List<MessageModel> GetSenderReceiverMessages(int senderId, int receiverId)
         {
             List<MessageModel> messages = new List<MessageModel>();
-            string sqlStatement = "SELECT m.messageid, m.senderid, m.receiverid, m.messagecontext, m.sentat, u.firstname AS sendername " +
+            string sqlStatement = "SELECT m.messageid, m.senderid, m.receiverid, m.messagecontent, m.sentat, u.firstname AS sendername " +
                                   "FROM Messages m " +
                                   "JOIN Users u ON m.senderid = u.Id " +
                                   "WHERE (m.senderid = @senderId AND m.receiverid = @receiverId) OR (m.senderid = @receiverId AND m.receiverid = @senderId) " +
@@ -178,7 +136,7 @@ namespace ChristanCrush.Services
                             message.MessageId = Convert.ToInt32(reader["messageid"]);
                             message.SenderId = Convert.ToInt32(reader["senderid"]);
                             message.ReceiverId = Convert.ToInt32(reader["receiverid"]);
-                            message.MessageContent = reader["messagecontext"].ToString();
+                            message.MessageContent = reader["messagecontent"].ToString();
                             message.SentAt = Convert.ToDateTime(reader["sentat"]);
                             message.SenderName = reader["sendername"].ToString();
 
@@ -191,7 +149,6 @@ namespace ChristanCrush.Services
                     Console.WriteLine(ex.Message);
                 }
             }
-
             return messages;
         }
     }
