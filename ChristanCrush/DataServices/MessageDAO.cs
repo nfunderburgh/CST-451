@@ -39,7 +39,7 @@ namespace ChristanCrush.Services
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    Debug.WriteLine(ex.Message);
                     success = false;
                 }
             }
@@ -64,7 +64,7 @@ namespace ChristanCrush.Services
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    Debug.WriteLine(ex.Message);
                     return false;
                 }
             }
@@ -103,7 +103,7 @@ namespace ChristanCrush.Services
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    Debug.WriteLine(ex.Message);
                 }
             }
 
@@ -146,7 +146,7 @@ namespace ChristanCrush.Services
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    Debug.WriteLine(ex.Message);
                 }
             }
             return messages;

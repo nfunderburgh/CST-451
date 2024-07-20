@@ -140,12 +140,15 @@ namespace ChristanCrush.Services
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex.Message);
+                        Debug.WriteLine(ex.Message);
                         success = false;
                     };
                 }
             }
-            Debug.WriteLine("Email is already used");
+            else
+            {
+                Debug.WriteLine("Email is already used");
+            }
             return success;
         }
 

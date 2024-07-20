@@ -1,33 +1,57 @@
-﻿@{
+﻿@model ChristanCrush.Models.ProfileModel
+@{
     ViewData["Title"] = "Create Profile";
     Layout = "_LoggedInLayout";
 }
+<script>
+    
+</script>
 
 <h2>Create Profile</h2>
 <div class="container login-container mt-5 mb-4">
-    <form method="post" enctype="multipart/form-data">
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
         <div class="form-group mb-3">
-            <label for="Name" class="control-label">Full Name</label>
-            <input id="Name" name="Name" class="form-control" placeholder="John Doe" />
-            <span class="text-danger"></span>
+            <label asp-for="FullName" class="control-label"></label>
+            <input asp-for="FullName" class="form-control" placeholder="John Doe" />
+            <span asp-validation-for="FullName" class="text-danger"></span>
         </div>
         <div class="form-group mb-3">
-            <label for="Bio" class="control-label">Bio</label>
-            <textarea id="Bio" name="Bio" class="form-control" placeholder="Tell us a little about yourself..."></textarea>
-            <span class="text-danger"></span>
+            <label asp-for="Bio" class="control-label"></label>
+            <textarea asp-for="Bio" class="form-control" placeholder="Tell us a little about yourself..."></textarea>
+            <span asp-validation-for="Bio" class="text-danger"></span>
         </div>
         <div class="form-group mb-3">
-            <label for="Interests" class="control-label">Interests</label>
-            <input id="Interests" name="Interests" class="form-control" placeholder="Hiking, Reading, Cooking" />
-            <span class="text-danger"></span>
+            <label asp-for="Occupation" class="control-label"></label>
+            <input asp-for="Occupation" class="form-control" placeholder="Your Occupation" />
+            <span asp-validation-for="Occupation" class="text-danger"></span>
         </div>
         <div class="form-group mb-3">
-            <label for="ProfilePictureUrl" class="control-label">Profile Picture</label>
-            <input id="ProfilePictureUrl" name="ProfilePictureUrl" type="file" class="form-control" />
-            <span class="text-danger"></span>
+            <label asp-for="Hobbies" class="control-label"></label>
+            <input asp-for="Hobbies" class="form-control" placeholder="Hiking, Reading, Cooking" />
+            <span asp-validation-for="Hobbies" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <label asp-for="Image1" class="control-label"></label>
+            <input asp-for="Image1" type="file" class="form-control" id="imageInput"/>
+            <span asp-validation-for="Image1" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <label class="control-label">Image Preview:</label>
+            <img id="imagePreview" src="#" alt="Image Preview" style="display: none; max-width: 100%; height: auto;" />
+        </div>
+        <div class="form-group mb-3">
+            <label asp-for="Image2" class="control-label"></label>
+            <input asp-for="Image2" type="file" class="form-control" />
+            <span asp-validation-for="Image2" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <label asp-for="Image3" class="control-label"></label>
+            <input asp-for="Image3" type="file" class="form-control" />
+            <span asp-validation-for="Image3" class="text-danger"></span>
         </div>
         <div class="form-group">
             <input type="submit" value="Create" class="btn btn-primary" />
         </div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     </form>
 </div>
