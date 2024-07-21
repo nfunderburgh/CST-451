@@ -1,5 +1,6 @@
 ﻿using ChristanCrush.Models;
 using ChristanCrush.Services;
+using ChristanCrush.Utility;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -31,7 +32,7 @@ namespace ChristanCrush.Controllers
 
             int userId = int.Parse(HttpContext.Session.GetString("userId"));
 
-            message.ReceiverId = 2; // Need To Get Receiver Id Somehow
+            message.ReceiverId = 2; // Need To Get Receiver Id Somehow from match
             message.SenderId = userId;
 
             if (messageDAO.InsertMessage(message))

@@ -7,14 +7,47 @@
     
 </script>
 
-<h2>Create Profile</h2>
-<div class="container login-container mt-5 mb-4">
-    <form asp-action="Create" method="post" enctype="multipart/form-data">
-        <div class="form-group mb-3">
-            <label asp-for="FullName" class="control-label"></label>
-            <input asp-for="FullName" class="form-control" placeholder="John Doe" />
-            <span asp-validation-for="FullName" class="text-danger"></span>
+<h2 style="text-align:center" class="mt-1 mb-1">Create Profile</h2>
+<div class="container login-container mt-4 mb-2">
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <!-- IMAGES -->
+        <div id="imagesform">
+            <div class="image-container">
+                <div class="form-group mb-2">
+                    <label asp-for="Image1" class="control-label"></label>
+                    <input asp-for="Image1" type="file" class="form-control" id="imageInput1" />
+                    <span asp-validation-for="Image1" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label class="control-label">Image 1 Preview:</label>
+                    <img id="imagePreview1" src="#" alt="Image 1 Preview" style="display: none; max-width: 100%; height: auto;" />
+                </div>
+            </div>
+            <div class="image-container">
+                <div class="form-group mb-2">
+                    <label asp-for="Image2" class="control-label"></label>
+                    <input asp-for="Image2" type="file" class="form-control" id="imageInput2" />
+                    <span asp-validation-for="Image2" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-2">
+                    <label class="control-label">Image 2 Preview:</label>
+                    <img id="imagePreview2" src="#" alt="Image 2 Preview" style="display: none; max-width: 100%; height: auto;" />
+                </div>
+            </div>
+            <div class="image-container">
+                <div class="form-group mb-2">
+                    <label asp-for="Image3" class="control-label"></label>
+                    <input asp-for="Image3" type="file" class="form-control" id="imageInput3" />
+                    <span asp-validation-for="Image3" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label class="control-label">Image 3 Preview:</label>
+                    <img id="imagePreview3" src="#" alt="Image 3 Preview" style="display: none; max-width: 100%; height: auto;" />
+                </div>
+            </div>
         </div>
+        <!-- INSERTED TEXT -->
         <div class="form-group mb-3">
             <label asp-for="Bio" class="control-label"></label>
             <textarea asp-for="Bio" class="form-control" placeholder="Tell us a little about yourself..."></textarea>
@@ -30,28 +63,9 @@
             <input asp-for="Hobbies" class="form-control" placeholder="Hiking, Reading, Cooking" />
             <span asp-validation-for="Hobbies" class="text-danger"></span>
         </div>
-        <div class="form-group mb-3">
-            <label asp-for="Image1" class="control-label"></label>
-            <input asp-for="Image1" type="file" class="form-control" id="imageInput"/>
-            <span asp-validation-for="Image1" class="text-danger"></span>
-        </div>
-        <div class="form-group mb-3">
-            <label class="control-label">Image Preview:</label>
-            <img id="imagePreview" src="#" alt="Image Preview" style="display: none; max-width: 100%; height: auto;" />
-        </div>
-        <div class="form-group mb-3">
-            <label asp-for="Image2" class="control-label"></label>
-            <input asp-for="Image2" type="file" class="form-control" />
-            <span asp-validation-for="Image2" class="text-danger"></span>
-        </div>
-        <div class="form-group mb-3">
-            <label asp-for="Image3" class="control-label"></label>
-            <input asp-for="Image3" type="file" class="form-control" />
-            <span asp-validation-for="Image3" class="text-danger"></span>
-        </div>
+
         <div class="form-group">
             <input type="submit" value="Create" class="btn btn-primary" />
         </div>
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     </form>
 </div>

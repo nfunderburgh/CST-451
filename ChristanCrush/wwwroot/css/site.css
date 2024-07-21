@@ -36,3 +36,22 @@
     justify-content: center;
     align-items: center;
 }
+
+.image-container {
+    width: 32%;
+    height: auto;
+}
+
+#imagesform {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.image-container img {
+    max-height: 300px;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+
+}

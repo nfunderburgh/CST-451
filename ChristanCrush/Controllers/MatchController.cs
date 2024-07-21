@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ChristanCrush.Utility;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ChristanCrush.Controllers
 {

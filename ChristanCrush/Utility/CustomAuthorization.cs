@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace ChristanCrush.Controllers
+namespace ChristanCrush.Utility
 {
     public class CustomAuthorizationAttribute : Attribute, IAuthorizationFilter
     {

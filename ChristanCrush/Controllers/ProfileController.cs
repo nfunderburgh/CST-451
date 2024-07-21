@@ -1,5 +1,7 @@
 ﻿using ChristanCrush.DataServices;
 using ChristanCrush.Models;
+using ChristanCrush.Services;
+using ChristanCrush.Utility;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -50,6 +52,12 @@ namespace ChristanCrush.Controllers
             int userId = int.Parse(HttpContext.Session.GetString("userId"));
             profile.UserId = userId;
 
+            UserDAO userDAO = new UserDAO();
+
+            string email = HttpContext.Session.GetString("email");
+            profile.FullName = userDAO.GetUserInfoByEmail(email);
+
+            
             // Process image1
             if (image1 != null && image1.Length > 0)
             {
@@ -99,7 +107,7 @@ namespace ChristanCrush.Controllers
                 Debug.WriteLine("Fail To Insert Profile");
             }
 
-            return RedirectToAction("Index");
+            return View("index", profile);
         }
     }
 }

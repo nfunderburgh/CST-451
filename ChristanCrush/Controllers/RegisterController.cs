@@ -1,5 +1,5 @@
 ﻿using ChristanCrush.Models;
-using ChristanCrush.Services;
+using ChristanCrush.DataServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ChristanCrush.Controllers
@@ -37,17 +37,20 @@ namespace ChristanCrush.Controllers
         public IActionResult ProcessRegister(UserModel user)
         {
             UserDAO securityDAO = new UserDAO();
-
-            if (securityDAO.RegisterUserValid(user))
+            if (ModelState.IsValid)
             {
-                //MyLogger.GetInstance().Info("Registration Success");
-                return View("RegisterSuccess", user);
+                if (securityDAO.RegisterUserValid(user))
+                {
+                    //MyLogger.GetInstance().Info("Registration Success");
+                    return View("RegisterSuccess", user);
+                }
+                else
+                {
+                    //MyLogger.GetInstance().Info("Registration Failed");
+                    return View("RegisterFailure", user);
+                }
             }
-            else
-            {
-                //MyLogger.GetInstance().Info("Registration Failed");
-                return View("RegisterFailure", user);
-            }
+            return View("index", user);
         }
     }
 }

@@ -11,7 +11,6 @@ namespace ChristanCrush.Models
         [Required]
         public int UserId { get; set; }
 
-        [Required]
         [DisplayName("Full Name")]
         public string FullName { get; set; }
 

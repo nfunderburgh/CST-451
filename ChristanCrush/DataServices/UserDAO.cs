@@ -3,7 +3,7 @@ using ChristanCrush.Utility;
 using MySqlConnector;
 using System.Diagnostics;
 
-namespace ChristanCrush.Services
+namespace ChristanCrush.DataServices
 {
     public class UserDAO
     {
@@ -47,6 +47,36 @@ namespace ChristanCrush.Services
             }
         }
 
+
+        public string GetUserInfoByEmail(string email)
+        {
+            string userInfo = null;
+
+            string sqlStatement = "SELECT FirstName, LastName FROM users WHERE Email = @EMAIL";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                MySqlCommand cmd = new MySqlCommand(sqlStatement, connection);
+                cmd.Parameters.AddWithValue("@EMAIL", email);
+
+                try
+                {
+                    connection.Open();
+                    MySqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        userInfo = reader["FirstName"].ToString() + reader["LastName"].ToString();
+                        
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+            return userInfo;
+        }
 
         /// <summary>
         /// The function FindUserIdByEmailAndPassword searches for a user ID in the database based on

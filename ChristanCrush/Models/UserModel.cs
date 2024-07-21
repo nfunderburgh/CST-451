@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using ChristanCrush.Utility;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace ChristanCrush.Models
@@ -24,7 +25,7 @@ namespace ChristanCrush.Models
         [Required]
         [DisplayName("Password")]
         [DataType(DataType.Password)]
-
+        [PasswordValidation]
         public string password { get; set; }
 
         [Required]
