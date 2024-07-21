@@ -8,6 +8,19 @@ namespace ChristanCrush.DataServices
     {
         String connectionString = "Server=localhost;User ID=root;Password=root;Database=CST_451;";
 
+        /// <summary>
+        /// The function `InsertProfile` inserts a profile into a database table using parameterized SQL
+        /// statements in C#.
+        /// </summary>
+        /// <param name="ProfileModel">The code snippet you provided is a method that inserts a profile
+        /// into a database using ADO.NET with MySQL. The `InsertProfile` method takes a `ProfileModel`
+        /// object as a parameter and inserts its properties into the `profiles` table in the
+        /// database.</param>
+        /// <returns>
+        /// The method `InsertProfile` returns a boolean value indicating whether the insertion of the
+        /// profile into the database was successful or not. If the insertion is successful, it returns
+        /// `true`, otherwise it returns `false`.
+        /// </returns>
         public bool InsertProfile(ProfileModel profile)
         {
             bool success = false;

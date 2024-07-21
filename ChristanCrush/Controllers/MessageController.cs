@@ -10,12 +10,13 @@ namespace ChristanCrush.Controllers
     {
 
 
+       
         /// <summary>
-        /// The Index function in C# is decorated with a CustomAuthorization attribute and returns a
-        /// View result.
+        /// The Index function retrieves all messages from the database and returns them to the view.
         /// </summary>
         /// <returns>
-        /// A View is being returned from the Index action method.
+        /// The `Index` method is returning a view with the `messages` data retrieved from the
+        /// `messageDAO.GetAllMessages()` method.
         /// </returns>
         [CustomAuthorization]
         public IActionResult Index()
@@ -26,6 +27,17 @@ namespace ChristanCrush.Controllers
             return View(messages);
         }
 
+        /// <summary>
+        /// The SendMessage function inserts a message into the database with the sender's and
+        /// receiver's IDs.
+        /// </summary>
+        /// <param name="MessageModel">MessageModel is a model class that represents a message with
+        /// properties like MessageId, SenderId, ReceiverId, Content, Timestamp, etc. It is used to pass
+        /// message data between the view and the controller in an ASP.NET application.</param>
+        /// <returns>
+        /// The method `SendMessage` is returning a `RedirectToAction` result with the action name
+        /// "Index".
+        /// </returns>
         public IActionResult SendMessage(MessageModel message)
         {
             MessageDAO messageDAO = new MessageDAO();

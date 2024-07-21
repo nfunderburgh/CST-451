@@ -17,23 +17,21 @@ namespace ChristanCrush.Controllers
         {
             return View();
         }
-
         
-
         /// <summary>
-        /// The ProcessRegister function in C# checks if a user registration is valid and returns a
-        /// success or failure view accordingly.
+        /// The ProcessRegister function in C# processes user registration by validating the user and
+        /// redirecting to appropriate views based on the registration outcome.
         /// </summary>
-        /// <param name="UserModel">A model class that represents a user with properties such as
-        /// username, password, email, etc.</param>
+        /// <param name="UserModel">A model class representing a user with properties such as username,
+        /// password, email, etc. It is used to pass user data between the view and the controller in an
+        /// ASP.NET MVC application.</param>
         /// <returns>
-        /// The ProcessRegister method is returning a View based on the result of the RegisterUserValid
-        /// method from the UserDAO class. If the RegisterUserValid method returns true, the method
-        /// returns a View called "RegisterSuccess" with the user model data. If the RegisterUserValid
-        /// method returns false, the method returns a View called "RegisterFailure" with the user model
-        /// data.
+        /// The ProcessRegister method returns a View based on the validation and registration status of
+        /// the user. If the ModelState is valid and the user registration is successful, it returns the
+        /// "RegisterSuccess" view with the user model. If the registration fails, it returns the
+        /// "RegisterFailure" view with the user model. If the ModelState is not valid, it returns the
+        /// "index" view with the user model.
         /// </returns>
-        //[ServiceFilter(typeof(LogControllerEntryExitFilter))]
         public IActionResult ProcessRegister(UserModel user)
         {
             UserDAO securityDAO = new UserDAO();

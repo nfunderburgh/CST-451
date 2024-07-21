@@ -5,12 +5,16 @@ namespace ChristanCrush.Utility
 {
     public class CustomAuthorizationAttribute : Attribute, IAuthorizationFilter
     {
-        /// <summary>
-        /// The function checks if the "username" session variable is set and redirects the user to the login page if it is
-        /// not.
-        /// </summary>
-        /// <param name="AuthorizationFilterContext">The AuthorizationFilterContext is an object that provides information
-        /// about the current authorization process and allows you to modify the result of the authorization.</param>
+        
+       /// <summary>
+       /// The function checks if a user is authorized by verifying the presence of an email in the
+       /// session and redirects to the login page if not.
+       /// </summary>
+       /// <param name="AuthorizationFilterContext">AuthorizationFilterContext represents the context in
+       /// which authorization filters are executed. It provides information about the current request
+       /// and allows you to interact with the authorization process. In the provided code snippet, the
+       /// OnAuthorization method is checking if a user's email is stored in the session. If the email
+       /// is not found,</param>
         public void OnAuthorization(AuthorizationFilterContext context)
         {
             string? email = context.HttpContext.Session.GetString("email");

@@ -9,19 +9,20 @@ namespace ChristanCrush.DataServices
     {
         String connectionString = "Server=localhost;User ID=root;Password=root;Database=CST_451;";
 
+
         /// <summary>
         /// The function `FindUserByEmailAndPasswordValid` checks if a user's email and password are
-        /// valid by querying the database for the hashed password and verifying it using a
-        /// PasswordHasher.
+        /// valid by querying the database for the hashed password and verifying it against the input
+        /// password.
         /// </summary>
-        /// <param name="UserModel">UserModel is a class that likely contains properties for user
-        /// information such as email and password.</param>
+        /// <param name="UserModel">UserModel is a class or structure that contains information about a
+        /// user. In this context, it likely has properties for the user's email and password.</param>
         /// <returns>
         /// The method `FindUserByEmailAndPasswordValid` returns a boolean value. It returns `true` if
         /// the user's email and password are valid (i.e., the password provided by the user matches the
-        /// hashed password stored in the database for the corresponding email address), and it returns
-        /// `false` if either the email is not found in the database or the password does not match the
-        /// hashed password.
+        /// hashed password stored in the database for the corresponding email), and it returns `false`
+        /// if either the email is not found in the database or the password does not match the hashed
+        /// password.
         /// </returns>
         public bool FindUserByEmailAndPasswordValid(UserModel user)
         {
@@ -48,6 +49,18 @@ namespace ChristanCrush.DataServices
         }
 
 
+        /// <summary>
+        /// The function `GetUserInfoByEmail` retrieves the first name and last name of a user based on
+        /// their email from a MySQL database.
+        /// </summary>
+        /// <param name="email">The code you provided is a C# method that retrieves user information
+        /// (first name and last name) based on the email address provided. The method connects to a
+        /// MySQL database, executes a SELECT query to fetch the user's first name and last name from
+        /// the "users" table where the email matches the</param>
+        /// <returns>
+        /// The `GetUserInfoByEmail` method returns a string containing the concatenated `FirstName` and
+        /// `LastName` of a user retrieved from the database based on the provided email address.
+        /// </returns>
         public string GetUserInfoByEmail(string email)
         {
             string userInfo = null;
@@ -78,16 +91,20 @@ namespace ChristanCrush.DataServices
             return userInfo;
         }
 
+       
         /// <summary>
-        /// The function FindUserIdByEmailAndPassword searches for a user ID in the database based on
-        /// the provided email and hashed password.
+        /// The function `FindUserIdByEmail` retrieves the user ID from a database based on the provided
+        /// email address in a C# application.
         /// </summary>
-        /// <param name="UserModel">UserModel is a class that contains the properties email and
-        /// password.</param>
+        /// <param name="UserModel">UserModel is a class or model that represents a user in the system.
+        /// It likely contains properties such as email, name, id, etc. In this context, UserModel is
+        /// used to pass user information, specifically the email, to the FindUserIdByEmail method for
+        /// finding the corresponding user ID in the database</param>
         /// <returns>
-        /// The method `FindUserIdByEmailAndPassword` is returning an integer value representing the
-        /// user ID found in the database based on the provided email and password in the `UserModel`
-        /// object.
+        /// The method `FindUserIdByEmail` returns an integer value representing the user ID found in
+        /// the database based on the provided email address in the `UserModel` object. If a user with
+        /// the specified email exists in the database, the method will return the corresponding user
+        /// ID. If no user is found, the method will return 0.
         /// </returns>
         public int FindUserIdByEmail(UserModel user)
         {
@@ -119,16 +136,19 @@ namespace ChristanCrush.DataServices
         }
 
 
+       
         /// <summary>
-        /// The function `RegisterUserValid` checks if a user's email is already registered and inserts
-        /// the user into a database if not.
+        /// The function `RegisterUserValid` registers a new user in a database if the email is not
+        /// already registered.
         /// </summary>
-        /// <param name="UserModel">It looks like you are trying to register a user in a database using
-        /// the provided UserModel object. The UserModel likely contains properties such as first_name,
-        /// last_name, email, password, date_of_birth, and gender.</param>
+        /// <param name="UserModel">The `RegisterUserValid` method you provided is responsible for
+        /// registering a new user in a database if the email is not already registered. Here's a
+        /// breakdown of the method:</param>
         /// <returns>
-        /// The method `RegisterUserValid` returns a boolean value indicating whether the user
-        /// registration was successful (`true`) or not (`false`).
+        /// The RegisterUserValid method returns a boolean value indicating whether the user
+        /// registration was successful or not. If the user registration is successful, it returns true.
+        /// If there was an error during registration or if the email is already registered, it returns
+        /// false.
         /// </returns>
         public bool RegisterUserValid(UserModel user)
         {

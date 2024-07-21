@@ -16,17 +16,17 @@ namespace ChristanCrush.Utility
                 return new ValidationResult($"Password must be at least {MinimumLength} characters long.");
             }
 
-            if (!Regex.IsMatch(password, @"[A-Z]")) // At least one uppercase letter
+            if (!Regex.IsMatch(password, @"[A-Z]"))
             {
                 return new ValidationResult("Password must contain at least one uppercase letter.");
             }
 
-            if (!Regex.IsMatch(password, @"\d")) // At least one digit
+            if (!Regex.IsMatch(password, @"\d"))
             {
                 return new ValidationResult("Password must contain at least one digit.");
             }
 
-            if (!Regex.IsMatch(password, @"[\W_]")) // At least one special character
+            if (!Regex.IsMatch(password, @"[\W_]"))
             {
                 return new ValidationResult("Password must contain at least one special character.");
             }

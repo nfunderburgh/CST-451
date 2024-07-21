@@ -5,8 +5,10 @@ namespace ChristanCrush.Controllers
 {
     public class MatchController : Controller
     {
+        
         /// <summary>
-        /// The Index function is decorated with a custom authorization attribute and returns a view.
+        /// The Index function in C# is decorated with a CustomAuthorization attribute and returns a
+        /// View result.
         /// </summary>
         /// <returns>
         /// A View is being returned from the Index action method.

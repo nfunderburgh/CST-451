@@ -8,6 +8,18 @@ namespace ChristanCrush.Services
     {
         String connectionString = "Server=localhost;User ID=root;Password=root;Database=CST_451;";
 
+        /// <summary>
+        /// The function `InsertMessage` inserts a message into a database table using parameterized SQL
+        /// statements in C#.
+        /// </summary>
+        /// <param name="MessageModel">The `InsertMessage` method you provided is responsible for
+        /// inserting a message into a database table named `messages`. It takes a `MessageModel` object
+        /// as a parameter, which likely contains information about the message such as sender ID,
+        /// receiver ID, message content, and sent timestamp.</param>
+        /// <returns>
+        /// The method `InsertMessage` returns a boolean value indicating whether the message insertion
+        /// was successful (`true`) or not (`false`).
+        /// </returns>
         public bool InsertMessage(MessageModel message)
         {
             bool success = false;
@@ -47,6 +59,17 @@ namespace ChristanCrush.Services
             return success;
         }
 
+        /// <summary>
+        /// The DeleteMessage function deletes a message from a database using the provided message ID.
+        /// </summary>
+        /// <param name="messageId">The `messageId` parameter is an integer value representing the
+        /// unique identifier of the message that you want to delete from the database table
+        /// `messages`.</param>
+        /// <returns>
+        /// The DeleteMessage method returns a boolean value. It returns true if the deletion operation
+        /// was successful and at least one row was affected in the database. Otherwise, it returns
+        /// false if an exception occurred during the deletion process or if no rows were affected.
+        /// </returns>
         public bool DeleteMessage(int messageId)
         {
             string sqlStatement = "DELETE FROM messages WHERE messageid = @MESSAGEID";
@@ -70,6 +93,14 @@ namespace ChristanCrush.Services
             }
         }
 
+        /// <summary>
+        /// The function `GetAllMessages` retrieves a list of messages from a database table and maps
+        /// the data to a list of `MessageModel` objects.
+        /// </summary>
+        /// <returns>
+        /// This method `GetAllMessages()` returns a list of `MessageModel` objects containing message
+        /// information retrieved from the database.
+        /// </returns>
         public List<MessageModel> GetAllMessages()
         {
             List<MessageModel> messages = new List<MessageModel>();
@@ -110,6 +141,22 @@ namespace ChristanCrush.Services
             return messages;
         }
 
+        /// <summary>
+        /// The function retrieves messages between two users based on sender and receiver IDs from a
+        /// database and returns a list of MessageModel objects.
+        /// </summary>
+        /// <param name="senderId">The `senderId` parameter in the `GetSenderReceiverMessages` method
+        /// represents the ID of the user who is sending the message. This method retrieves messages
+        /// between two users based on the sender and receiver IDs provided as parameters.</param>
+        /// <param name="receiverId">The `receiverId` parameter in the `GetSenderReceiverMessages`
+        /// method represents the ID of the user who is receiving the messages. This method retrieves
+        /// messages between two users based on their sender and receiver IDs.</param>
+        /// <returns>
+        /// This method returns a list of `MessageModel` objects that represent messages between two
+        /// users identified by `senderId` and `receiverId`. The messages are retrieved from the
+        /// database based on the provided sender and receiver IDs, sorted by the timestamp they were
+        /// sent at.
+        /// </returns>
         public List<MessageModel> GetSenderReceiverMessages(int senderId, int receiverId)
         {
             List<MessageModel> messages = new List<MessageModel>();
