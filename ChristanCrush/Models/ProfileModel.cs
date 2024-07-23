@@ -19,13 +19,20 @@ namespace ChristanCrush.Models
 
         [Required]
         [DisplayName("Profile Picture")]
-        public byte[] Image1 { get; set; }
+        public IFormFile Image1 { get; set; }
+
+        public byte[] Image1Data { get; set; }
+
 
         [DisplayName("Additional Image 1")]
-        public byte[] Image2 { get; set; }
+        public IFormFile Image2 { get; set; }
+
+        public byte[] Image2Data { get; set; }
 
         [DisplayName("Additional Image 2")]
-        public byte[] Image3 { get; set; }
+        public IFormFile Image3 { get; set; }
+
+        public byte[] Image3Data { get; set; }
 
         [Required]
         public string Occupation { get; set; }

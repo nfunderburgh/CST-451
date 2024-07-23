@@ -33,9 +33,9 @@ namespace ChristanCrush.DataServices
                 {
                     cmd.Parameters.AddWithValue("@USERID", profile.UserId);
                     cmd.Parameters.AddWithValue("@BIO", profile.Bio);
-                    cmd.Parameters.AddWithValue("@IMAGE1", profile.Image1 ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@IMAGE2", profile.Image2 ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@IMAGE3", profile.Image3 ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@IMAGE1", profile.Image1Data);
+                    cmd.Parameters.AddWithValue("@IMAGE2", profile.Image2Data);
+                    cmd.Parameters.AddWithValue("@IMAGE3", profile.Image3Data);
                     cmd.Parameters.AddWithValue("@OCCUPATION", profile.Occupation);
                     cmd.Parameters.AddWithValue("@HOBBIES", profile.Hobbies);
 
@@ -62,6 +62,55 @@ namespace ChristanCrush.DataServices
                 }
             }
             return success;
+        }
+
+        public ProfileModel GetProfileByUserId(int userId)
+        {
+            ProfileModel profile = null;
+
+            string sqlStatement = @"SELECT PROFILEID, USERID, BIO, IMAGE1, IMAGE2, IMAGE3, OCCUPATION, HOBBIES 
+                                    FROM profiles 
+                                    WHERE USERID = @USERID";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(sqlStatement, connection))
+                {
+                    cmd.Parameters.AddWithValue("@USERID", userId);
+
+                    try
+                    {
+                        connection.Open();
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                profile = new ProfileModel
+                                {
+                                    ProfileId = reader.GetInt32("PROFILEID"),
+                                    UserId = reader.GetInt32("USERID"),
+                                    Bio = reader.GetString("BIO"),
+                                    Image1Data =  (byte[])reader["IMAGE1"],
+                                    Image2Data = reader.IsDBNull(reader.GetOrdinal("IMAGE2")) ? new byte[0] : (byte[])reader["IMAGE2"],
+                                    Image3Data = reader.IsDBNull(reader.GetOrdinal("IMAGE3")) ? new byte[0] : (byte[])reader["IMAGE3"],
+                                    Occupation = reader.GetString("OCCUPATION"),
+                                    Hobbies = reader.GetString("HOBBIES")
+                                };
+                            }
+                            else
+                            {
+                                Debug.WriteLine("No profile found for the given UserId.");
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
+            }
+
+            return profile;
         }
     }
 }

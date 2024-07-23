@@ -20,6 +20,14 @@ namespace ChristanCrush.Controllers
         [CustomAuthorization]
         public IActionResult Index()
         {
+            ProfileDAO profileDao = new ProfileDAO();
+
+
+            int userId = int.Parse(HttpContext.Session.GetString("userId"));
+            ProfileModel profile = new ProfileModel();
+            profile = profileDao.GetProfileByUserId(userId);
+            Debug.WriteLine(profile.ProfileId);
+
             return View();
         }
 
@@ -48,7 +56,7 @@ namespace ChristanCrush.Controllers
         /// the model to the view.
         /// </returns>
         [HttpPost]
-        public async Task<IActionResult> Create(ProfileModel profile, IFormFile image1, IFormFile image2, IFormFile image3)
+        public async Task<IActionResult> Create(ProfileModel profile)
         {
             ProfileDAO profileDAO = new ProfileDAO();
 
@@ -56,59 +64,45 @@ namespace ChristanCrush.Controllers
             profile.UserId = userId;
 
             UserDAO userDAO = new UserDAO();
-
             string email = HttpContext.Session.GetString("email");
             profile.FullName = userDAO.GetUserInfoByEmail(email);
 
-            if (image1 != null && image1.Length > 0)
+            // Process images
+            profile.Image1Data = await ProcessFile(profile.Image1);
+            profile.Image2Data = await ProcessFile(profile.Image2);
+            profile.Image3Data = await ProcessFile(profile.Image3);
+
+            if (profile.Image1Data == null)
+            {
+                return View("index", profile);
+            }
+            else
+            {
+                if (profileDAO.InsertProfile(profile))
+                {
+                    Debug.WriteLine("Inserted Profile");
+                    return View("index", profile);
+                }
+                else
+                {
+                    Debug.WriteLine("Fail To Insert Profile");
+                    return View("index", profile);
+                }
+            }
+            
+        }
+
+        private async Task<byte[]> ProcessFile(IFormFile file)
+        {
+            if (file != null && file.Length > 0)
             {
                 using (var memoryStream = new MemoryStream())
                 {
-                    await image1.CopyToAsync(memoryStream);
-                    profile.Image1 = memoryStream.ToArray();
+                    await file.CopyToAsync(memoryStream);
+                    return memoryStream.ToArray();
                 }
             }
-            else
-            {
-            profile.Image1 = null;
-            }
-            if (image2 != null && image2.Length > 0)
-            {
-                using (var memoryStream = new MemoryStream())
-                {
-                    await image2.CopyToAsync(memoryStream);
-                    profile.Image2 = memoryStream.ToArray();
-                }
-            }
-            else
-            {
-                profile.Image2 = null;
-            }
-
-                
-            if (image3 != null && image3.Length > 0)
-                {
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        await image3.CopyToAsync(memoryStream);
-                        profile.Image3 = memoryStream.ToArray();
-                    }
-            }
-            else
-            {
-                profile.Image3 = null;
-            }
-
-            if (profileDAO.InsertProfile(profile))
-            {
-                Debug.WriteLine("Inserted Profile");
-            }
-            else
-            {
-                Debug.WriteLine("Fail To Insert Profile");
-            }
-
-            return View("profilesuccess", profile);
+            return null;
         }
     }
 }
