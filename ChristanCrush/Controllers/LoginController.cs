@@ -50,7 +50,7 @@ namespace ChristanCrush.Controllers
                 userId = userDAO.FindUserIdByEmail(user);
                 HttpContext.Session.SetString("userId", userId.ToString());
                 //MyLogger.GetInstance().Info("Login Success");
-                return View("../Explore/Index", user);
+                return RedirectToAction("Index", "Match");
             }
             else
             {

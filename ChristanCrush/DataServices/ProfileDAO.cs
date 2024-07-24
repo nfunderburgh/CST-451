@@ -112,5 +112,56 @@ namespace ChristanCrush.DataServices
 
             return profile;
         }
+
+        public ProfileModel GetRandomProfile(int currentUserId)
+        {
+            ProfileModel profile = null;
+
+            string sqlStatement = @"SELECT PROFILEID, USERID, BIO, IMAGE1, IMAGE2, IMAGE3, OCCUPATION, HOBBIES 
+                            FROM profiles 
+                            WHERE USERID != @CURRENTUSERID
+                            ORDER BY RAND()
+                            LIMIT 1";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(sqlStatement, connection))
+                {
+                    cmd.Parameters.AddWithValue("@CURRENTUSERID", currentUserId);
+
+                    try
+                    {
+                        connection.Open();
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                profile = new ProfileModel
+                                {
+                                    ProfileId = reader.GetInt32("PROFILEID"),
+                                    UserId = reader.GetInt32("USERID"),
+                                    Bio = reader.GetString("BIO"),
+                                    Image1Data = reader.IsDBNull(reader.GetOrdinal("IMAGE1")) ? new byte[0] : (byte[])reader["IMAGE1"],
+                                    Image2Data = reader.IsDBNull(reader.GetOrdinal("IMAGE2")) ? new byte[0] : (byte[])reader["IMAGE2"],
+                                    Image3Data = reader.IsDBNull(reader.GetOrdinal("IMAGE3")) ? new byte[0] : (byte[])reader["IMAGE3"],
+                                    Occupation = reader.GetString("OCCUPATION"),
+                                    Hobbies = reader.GetString("HOBBIES")
+                                };
+                            }
+                            else
+                            {
+                                Debug.WriteLine("No random profile found.");
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
+            }
+
+            return profile;
+        }
     }
 }

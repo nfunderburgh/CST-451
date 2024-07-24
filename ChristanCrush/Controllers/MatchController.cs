@@ -1,4 +1,6 @@
-﻿using ChristanCrush.Utility;
+﻿using ChristanCrush.DataServices;
+using ChristanCrush.Models;
+using ChristanCrush.Utility;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ChristanCrush.Controllers
@@ -16,7 +18,19 @@ namespace ChristanCrush.Controllers
         [CustomAuthorization]
         public IActionResult Index()
         {
-            return View();
+            ProfileModel profile = new ProfileModel();
+            ProfileDAO ProfileDao = new ProfileDAO();
+
+            int userId = int.Parse(HttpContext.Session.GetString("userId"));
+            profile = ProfileDao.GetRandomProfile(userId);
+
+            return View(profile);
+        }
+
+        public IActionResult DislikeProfile(int profileId)
+        {
+            // Do Nothing and show next user
+            return RedirectToAction("Index");
         }
     }
 }

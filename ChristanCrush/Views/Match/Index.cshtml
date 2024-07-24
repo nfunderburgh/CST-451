@@ -1,0 +1,30 @@
+﻿@model ChristanCrush.Models.ProfileModel
+
+@{
+    ViewData["Title"] = "Explore";
+    Layout = "_LoggedInLayout";
+}
+
+<div class="container mt-5">
+    <div class="row">
+            <div class="col-md-4">
+                <div class="card mb-4">
+            
+                    <div class="card-body">
+                        <h5 class="card-title">@Model.FullName</h5>
+                        <p class="card-text">@Model.Bio</p>
+                        <p class="card-text">@Model.Hobbies</p>
+                        <p class="card-text">@Model.Occupation</p>
+                        <form method="post" asp-action="LikeProfile">
+                            <input type="hidden" name="profileId" value="@Model.ProfileId" />
+                            <button type="submit" class="btn btn-primary">Like</button>
+                        </form>
+                        <form method="post" asp-action="DislikeProfile">
+                            <input type="hidden" name="profileId" value="@Model.ProfileId" />
+                            <button type="submit" class="btn btn-secondary">Dislike</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>

@@ -20,8 +20,8 @@ namespace ChristanCrush.Controllers
         [CustomAuthorization]
         public IActionResult Index()
         {
-            ProfileDAO profileDao = new ProfileDAO();
 
+            ProfileDAO profileDao = new ProfileDAO();
 
             int userId = int.Parse(HttpContext.Session.GetString("userId"));
             ProfileModel profile = new ProfileModel();
