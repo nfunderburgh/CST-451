@@ -26,9 +26,9 @@ namespace ChristanCrush.Controllers
             int userId = int.Parse(HttpContext.Session.GetString("userId"));
             ProfileModel profile = new ProfileModel();
             profile = profileDao.GetProfileByUserId(userId);
-            Debug.WriteLine(profile.ProfileId);
+            //Debug.WriteLine(profile.ProfileId);
 
-            return View();
+            return View(profile);
         }
 
 
@@ -64,8 +64,7 @@ namespace ChristanCrush.Controllers
             profile.UserId = userId;
 
             UserDAO userDAO = new UserDAO();
-            string email = HttpContext.Session.GetString("email");
-            profile.FullName = userDAO.GetUserInfoByEmail(email);
+            profile.FullName = userDAO.GetUserInfoByEmail(userId);
 
             // Process images
             profile.Image1Data = await ProcessFile(profile.Image1);

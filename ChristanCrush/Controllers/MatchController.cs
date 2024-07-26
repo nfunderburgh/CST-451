@@ -2,6 +2,8 @@
 using ChristanCrush.Models;
 using ChristanCrush.Utility;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
+using System.Drawing;
 
 namespace ChristanCrush.Controllers
 {
@@ -20,10 +22,15 @@ namespace ChristanCrush.Controllers
         {
             ProfileModel profile = new ProfileModel();
             ProfileDAO ProfileDao = new ProfileDAO();
+            UserDAO UserDao = new UserDAO();
 
             int userId = int.Parse(HttpContext.Session.GetString("userId"));
             profile = ProfileDao.GetRandomProfile(userId);
 
+            profile.FullName = UserDao.GetUserInfoByEmail(profile.UserId);
+
+            Debug.WriteLine(profile.Image2Data);
+           
             return View(profile);
         }
 
@@ -31,6 +38,14 @@ namespace ChristanCrush.Controllers
         {
             // Do Nothing and show next user
             return RedirectToAction("Index");
+        }
+
+        public static Image ByteArrayToImage(byte[] byteArray)
+        {
+            using (MemoryStream ms = new MemoryStream(byteArray))
+            {
+                return Image.FromStream(ms);
+            }
         }
     }
 }

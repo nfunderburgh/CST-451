@@ -134,6 +134,10 @@
               "target": "Package",
               "version": "[2.3.7, )"
             },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[8.0.7, )"
+            },
             "xunit.assert": {
               "target": "Package",
               "version": "[2.9.0, )"

@@ -3,18 +3,39 @@
 @{
     ViewData["Title"] = "Explore";
     Layout = "_LoggedInLayout";
+
+    string image1Base64 = Model.Image1Data != null ? Convert.ToBase64String(Model.Image1Data) : null;
+    string image2Base64 = Model.Image2Data != null ? Convert.ToBase64String(Model.Image2Data) : null;
+    string image3Base64 = Model.Image3Data != null ? Convert.ToBase64String(Model.Image3Data) : null;
 }
 
-<div class="container mt-5">
-    <div class="row">
-            <div class="col-md-4">
-                <div class="card mb-4">
-            
-                    <div class="card-body">
-                        <h5 class="card-title">@Model.FullName</h5>
-                        <p class="card-text">@Model.Bio</p>
-                        <p class="card-text">@Model.Hobbies</p>
-                        <p class="card-text">@Model.Occupation</p>
+<div class="container mt-5 d-flex justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.FullName</h5>
+                    <div class="mb-3 image-container">
+                        @if (!string.IsNullOrEmpty(image1Base64))
+                        {
+                            <img src="data:image/jpeg;base64,@image1Base64" alt="Profile Image" class="img-fluid" />
+                        }
+                    </div>
+                    <div class="mb-3 image-container">
+                        @if (!string.IsNullOrEmpty(image2Base64))
+                        {
+                            <img src="data:image/jpeg;base64,@image2Base64" alt="Additional Image 1" class="img-fluid" />
+                        }
+                    </div>
+                    <div class="mb-3 image-container">
+                        @if (!string.IsNullOrEmpty(image3Base64))
+                        {
+                            <img src="data:image/jpeg;base64,@image3Base64" alt="Additional Image 2" class="img-fluid" />
+                        }
+                    </div>
+                    <p class="card-text">@Model.Bio</p>
+                    <p class="card-text">@Model.Hobbies</p>
+                    <p class="card-text">@Model.Occupation</p>
+                    <div class="d-flex justify-content-between">
                         <form method="post" asp-action="LikeProfile">
                             <input type="hidden" name="profileId" value="@Model.ProfileId" />
                             <button type="submit" class="btn btn-primary">Like</button>
@@ -26,5 +47,5 @@
                     </div>
                 </div>
             </div>
-    </div>
+        </div>
 </div>

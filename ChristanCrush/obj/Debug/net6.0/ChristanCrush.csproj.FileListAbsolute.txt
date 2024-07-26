@@ -32,3 +32,6 @@ D:\Github\CST-451\ChristanCrush\obj\Debug\net6.0\refint\ChristanCrush.dll
 D:\Github\CST-451\ChristanCrush\obj\Debug\net6.0\ChristanCrush.pdb
 D:\Github\CST-451\ChristanCrush\obj\Debug\net6.0\ChristanCrush.genruntimeconfig.cache
 D:\Github\CST-451\ChristanCrush\obj\Debug\net6.0\ref\ChristanCrush.dll
+D:\Github\CST-451\ChristanCrush\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+D:\Github\CST-451\ChristanCrush\bin\Debug\net6.0\System.Drawing.Common.dll
+D:\Github\CST-451\ChristanCrush\bin\Debug\net6.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll

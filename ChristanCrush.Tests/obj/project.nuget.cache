@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "PR6uLsBiCwcrauvc6tC6PPEtS+vi9hRcvjYTJddmy4PD9/OltTDbbqXHVyWtdrzkwhMv22wGwIRtM5E3C/637w==",
+  "dgSpecHash": "OzjbDPyeFYGeL0QxBNjBCdg9vBFf2UBXSYAPZSqOeVKOlWLsKdr73PNdgfS7FvBG5O2H5M0DRkw7UDARGFXpHQ==",
   "success": true,
   "projectFilePath": "D:\\Github\\CST-451\\ChristanCrush.Tests\\ChristanCrush.Tests.csproj",
   "expectedPackageFiles": [
@@ -26,6 +26,7 @@
     "C:\\Users\\APR Services\\.nuget\\packages\\microsoft.testplatform.testhost\\17.1.0\\microsoft.testplatform.testhost.17.1.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\APR Services\\.nuget\\packages\\microsoft.win32.registry\\4.4.0\\microsoft.win32.registry.4.4.0.nupkg.sha512",
+    "C:\\Users\\APR Services\\.nuget\\packages\\microsoft.win32.systemevents\\8.0.0\\microsoft.win32.systemevents.8.0.0.nupkg.sha512",
     "C:\\Users\\APR Services\\.nuget\\packages\\miniprofiler\\4.0.138\\miniprofiler.4.0.138.nupkg.sha512",
     "C:\\Users\\APR Services\\.nuget\\packages\\miniprofiler.shared\\4.0.138\\miniprofiler.shared.4.0.138.nupkg.sha512",
     "C:\\Users\\APR Services\\.nuget\\packages\\moq\\4.20.70\\moq.4.20.70.nupkg.sha512",
@@ -86,6 +87,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.diagnostics.stacktrace\\4.3.0\\system.diagnostics.stacktrace.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.diagnostics.tools\\4.3.0\\system.diagnostics.tools.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.diagnostics.tracing\\4.3.0\\system.diagnostics.tracing.4.3.0.nupkg.sha512",
+    "C:\\Users\\APR Services\\.nuget\\packages\\system.drawing.common\\8.0.7\\system.drawing.common.8.0.7.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.dynamic.runtime\\4.3.0\\system.dynamic.runtime.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.globalization\\4.3.0\\system.globalization.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.globalization.calendars\\4.3.0\\system.globalization.calendars.4.3.0.nupkg.sha512",
