@@ -26,17 +26,16 @@ namespace ChristanCrush.Controllers
 
             int userId = int.Parse(HttpContext.Session.GetString("userId"));
             profile = ProfileDao.GetRandomProfile(userId);
-
-            profile.FullName = UserDao.GetUserInfoByEmail(profile.UserId);
+            profile.FullName = UserDao.GetUserNameByUserId(profile.UserId);
 
             Debug.WriteLine(profile.Image2Data);
            
             return View(profile);
         }
 
+        [CustomAuthorization]
         public IActionResult DislikeProfile(int profileId)
         {
-            // Do Nothing and show next user
             return RedirectToAction("Index");
         }
 

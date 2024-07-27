@@ -198,5 +198,37 @@ namespace ChristanCrush.Services
             }
             return messages;
         }
+
+        public int GetMessageIdBySentAt(DateTime sentAt)
+        {
+            int messageId = 0;
+            string sqlStatement = "SELECT m.messageid " +
+                                  "FROM Messages m " +
+                                  "WHERE m.sentat = @SentAt " +
+                                  "ORDER BY m.sentat ASC " +
+                                  "LIMIT 1";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                MySqlCommand cmd = new MySqlCommand(sqlStatement, connection);
+                cmd.Parameters.AddWithValue("@SentAt", sentAt.ToString("yyyy-MM-dd HH:mm:ss"));
+
+                try
+                {
+                    connection.Open();
+                    object result = cmd.ExecuteScalar();
+                    if (result != null)
+                    {
+                        messageId = Convert.ToInt32(result);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+            }
+
+            return messageId;
+        }
     }
 }

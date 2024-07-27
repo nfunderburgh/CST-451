@@ -39,12 +39,10 @@ namespace ChristanCrush.Controllers
             {
                 if (securityDAO.RegisterUserValid(user))
                 {
-                    //MyLogger.GetInstance().Info("Registration Success");
                     return View("RegisterSuccess", user);
                 }
                 else
                 {
-                    //MyLogger.GetInstance().Info("Registration Failed");
                     return View("RegisterFailure", user);
                 }
             }

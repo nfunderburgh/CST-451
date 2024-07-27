@@ -45,17 +45,17 @@ namespace ChristanCrush.Controllers
 
             if (userDAO.FindUserByEmailAndPasswordValid(user))
             {
-                HttpContext.Session.SetString("email", user.email);
+                //HttpContext.Session.SetString("email", user.email);
 
                 userId = userDAO.FindUserIdByEmail(user);
                 HttpContext.Session.SetString("userId", userId.ToString());
-                //MyLogger.GetInstance().Info("Login Success");
+
                 return RedirectToAction("Index", "Match");
             }
             else
             {
 
-                HttpContext.Session.Remove("email");
+                HttpContext.Session.Remove("userId");
 
                 //MyLogger.GetInstance().Info("Login Failure");
                 return View("LoginFailure", user);
@@ -74,7 +74,7 @@ namespace ChristanCrush.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            // MyLogger.GetInstance().Info("Logout Success");
+
             return RedirectToAction("Index", "Login");
         }
     }

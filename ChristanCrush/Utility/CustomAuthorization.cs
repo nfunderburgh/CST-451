@@ -17,11 +17,10 @@ namespace ChristanCrush.Utility
        /// is not found,</param>
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            string? email = context.HttpContext.Session.GetString("email");
+            string? userIdString = context.HttpContext.Session.GetString("userId");
 
-            if (email == null)
+            if (string.IsNullOrEmpty(userIdString) || !int.TryParse(userIdString, out int userId))
             {
-
                 context.Result = new RedirectResult("/Login");
             }
             else

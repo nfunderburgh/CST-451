@@ -61,11 +61,11 @@ namespace ChristanCrush.DataServices
         /// The `GetUserInfoByEmail` method returns a string containing the concatenated `FirstName` and
         /// `LastName` of a user retrieved from the database based on the provided email address.
         /// </returns>
-        public string GetUserInfoByEmail(int userId)
+        public string GetUserNameByUserId(int userId)
         {
             string userInfo = null;
 
-            string sqlStatement = "SELECT FirstName, LastName FROM users WHERE Id = @ID";
+            string sqlStatement = "SELECT firstname, lastname FROM users WHERE id = @ID";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {

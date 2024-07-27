@@ -64,7 +64,7 @@ namespace ChristanCrush.Controllers
             profile.UserId = userId;
 
             UserDAO userDAO = new UserDAO();
-            profile.FullName = userDAO.GetUserInfoByEmail(userId);
+            profile.FullName = userDAO.GetUserNameByUserId(userId);
 
             // Process images
             profile.Image1Data = await ProcessFile(profile.Image1);

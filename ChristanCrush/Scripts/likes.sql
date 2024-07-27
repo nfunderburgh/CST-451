@@ -1,0 +1,8 @@
+﻿CREATE TABLE Likes (
+    LikeId INT AUTO_INCREMENT PRIMARY KEY,
+    LikerId INT NOT NULL,
+    LikedId INT NOT NULL,
+    LikedAt TIMESTAMP,
+    FOREIGN KEY (LikerId) REFERENCES Users(Id),
+    FOREIGN KEY (LikedId) REFERENCES Users(Id)
+);

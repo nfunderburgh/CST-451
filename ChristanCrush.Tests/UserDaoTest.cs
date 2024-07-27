@@ -1,4 +1,5 @@
-﻿using ChristanCrush.Models;
+﻿using ChristanCrush.DataServices;
+using ChristanCrush.Models;
 using ChristanCrush.Services;
 using ChristanCrush.Utility;
 using Moq;
@@ -28,8 +29,8 @@ namespace ChristanCrush.Tests
                 first_name = "John",
                 last_name = "Doe",
                 email = "registerme@example.com",
-                password = "password123",
-                confirm_password = "password123",
+                password = "Password123$",
+                confirm_password = "Password123$",
                 date_of_birth = new DateTime(2015, 12, 31),
                 gender = "M"
             };
@@ -52,8 +53,8 @@ namespace ChristanCrush.Tests
                 first_name = "John",
                 last_name = "Doe",
                 email = "registerme@example.com",
-                password = "password123",
-                confirm_password = "password123",
+                password = "Password123$",
+                confirm_password = "Password123$",
                 date_of_birth = new DateTime(2015, 12, 31),
                 gender = "M"
             };
@@ -64,6 +65,71 @@ namespace ChristanCrush.Tests
 
             Assert.True(result);
             Assert.False(userDAO.IsEmailRegistered(user));
+        }
+
+        [Fact]
+        public void FindUserByEmailAndPasswordValid()
+        {
+            var user = new UserModel
+            {
+                first_name = "John",
+                last_name = "Doe",
+                email = "testuser@example.com",
+                password = "Password123$",
+                confirm_password = "Password123$",
+                date_of_birth = new DateTime(2015, 12, 31),
+                gender = "M"
+            };
+
+            userDAO.RegisterUserValid(user);
+            bool result = userDAO.FindUserByEmailAndPasswordValid(user);
+
+            Assert.True(result);
+            userDAO.DeleteUserByEmail(user);
+        }
+
+        [Fact]
+        public void GetUserNameByUserId()
+        {
+            var user = new UserModel
+            {
+                first_name = "John",
+                last_name = "Doe",
+                email = "testuser@example.com",
+                password = "Password123$",
+                confirm_password = "Password123$",
+                date_of_birth = new DateTime(2015, 12, 31),
+                gender = "M"
+            };
+
+            userDAO.RegisterUserValid(user);
+            int userId = userDAO.FindUserIdByEmail(user);
+
+            string userInfo = userDAO.GetUserNameByUserId(userId);
+
+            Assert.Equal("John Doe", userInfo);
+            userDAO.DeleteUserByEmail(user);
+        }
+
+        [Fact]
+        public void IsEmailRegistered()
+        {
+            var user = new UserModel
+            {
+                first_name = "John",
+                last_name = "Doe",
+                email = "testuser@example.com",
+                password = "Password123$",
+                confirm_password = "Password123$",
+                date_of_birth = new DateTime(2015, 12, 31),
+                gender = "M"
+            };
+
+            userDAO.RegisterUserValid(user);
+            bool isRegistered = userDAO.IsEmailRegistered(user);
+
+            Assert.True(isRegistered);
+            userDAO.DeleteUserByEmail(user);
         }
     }
 }
