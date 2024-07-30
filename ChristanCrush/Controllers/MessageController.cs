@@ -8,9 +8,8 @@ namespace ChristanCrush.Controllers
 {
     public class MessageController : Controller
     {
+        public static int MatchedUserId = 0;
 
-
-       
         /// <summary>
         /// The Index function retrieves all messages from the database and returns them to the view.
         /// </summary>
@@ -19,10 +18,12 @@ namespace ChristanCrush.Controllers
         /// `messageDAO.GetAllMessages()` method.
         /// </returns>
         [CustomAuthorization]
-        public IActionResult Index()
+        public IActionResult Index(int matchUserId)
         {
             MessageDAO messageDAO = new MessageDAO();
-            var messages = messageDAO.GetAllMessages();
+            int userId = int.Parse(HttpContext.Session.GetString("userId"));
+            MatchedUserId = matchUserId;
+            var messages = messageDAO.GetSenderReceiverMessages(matchUserId, userId);
 
             return View(messages);
         }
@@ -44,7 +45,7 @@ namespace ChristanCrush.Controllers
 
             int userId = int.Parse(HttpContext.Session.GetString("userId"));
 
-            message.ReceiverId = 2; // Need To Get Receiver Id Somehow from match
+            message.ReceiverId = MatchedUserId;
             message.SenderId = userId;
 
             if (messageDAO.InsertMessage(message))
@@ -56,7 +57,7 @@ namespace ChristanCrush.Controllers
                 Debug.WriteLine("Fail To Insert Message");
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Message", new { matchUserId = message.ReceiverId });
         }
 
     }

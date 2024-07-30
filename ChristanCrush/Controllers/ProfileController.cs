@@ -54,7 +54,6 @@ namespace ChristanCrush.Controllers
         /// The method is returning a `View` with the name "index" and passing the `profile` object as
         /// the model to the view.
         /// </returns>
-        [HttpPost]
         public async Task<IActionResult> CreateProfile(ProfileModel profile)
         {
             ProfileDAO profileDAO = new ProfileDAO();

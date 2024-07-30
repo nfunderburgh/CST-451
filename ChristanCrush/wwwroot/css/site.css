@@ -40,6 +40,10 @@
 .image-container {
     width: 32%;
     height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
 }
 
 #imagesform {
@@ -53,5 +57,4 @@
     object-fit: cover;
     display: block;
     margin: 0 auto;
-
 }

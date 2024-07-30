@@ -211,5 +211,44 @@ namespace ChristanCrush.DataServices
 
             return profile;
         }
+
+        public List<ProfileModel> GetProfilesMatchedWithUser(int userId)
+        {
+            List<ProfileModel> profiles = new List<ProfileModel>();
+
+            string sqlStatement = @"SELECT u.FIRSTNAME, u.LASTNAME, p.IMAGE1, u.ID FROM profiles p
+                                JOIN Users u ON p.USERID = u.Id JOIN Matches m ON (p.USERID = m.UserId2 AND m.UserId1 = @UserId)OR (p.USERID = m.UserId1 AND m.UserId2 = @UserId);";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                MySqlCommand cmd = new MySqlCommand(sqlStatement, connection);
+
+                cmd.Parameters.AddWithValue("@UserId", userId);
+
+                try
+                {
+                    connection.Open();
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            ProfileModel profile = new ProfileModel
+                            {
+                                FullName = reader.GetString("FIRSTNAME") + " " + reader.GetString("LASTNAME"),
+                                Image1Data = (byte[])reader["IMAGE1"],
+                                UserId = reader.GetInt32("ID")
+                            };
+                            profiles.Add(profile);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+
+            return profiles;
+        }
     }
 }

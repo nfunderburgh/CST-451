@@ -25,16 +25,25 @@ namespace ChristanCrush.Controllers
             UserDAO UserDao = new UserDAO();
 
             int userId = int.Parse(HttpContext.Session.GetString("userId"));
-            profile = ProfileDao.GetRandomProfile(userId);
-           
-            if(profile == null)
+            profile = ProfileDao.GetProfileByUserId(userId);
+
+
+            if (profile != null)
             {
-                return View("NoProfiles");
+                profile = ProfileDao.GetRandomProfile(userId);
+                if (profile == null)
+                {
+                    return View("NoProfiles");
+                }
+                else
+                {
+                    profile.FullName = UserDao.GetUserNameByUserId(profile.UserId);
+                    return View(profile);
+                }
             }
             else
             {
-                profile.FullName = UserDao.GetUserNameByUserId(profile.UserId);
-                return View(profile);
+                return View("CreateProfile");
             }
         }
 
@@ -92,6 +101,16 @@ namespace ChristanCrush.Controllers
             };
 
             MatchDao.InsertMatch(match);
+        }
+
+        [CustomAuthorization]
+        public IActionResult ViewMatches()
+        {
+            ProfileDAO ProfileDao = new ProfileDAO();
+            int userId = int.Parse(HttpContext.Session.GetString("userId"));
+
+
+            return View("Matches", ProfileDao.GetProfilesMatchedWithUser(userId));
         }
 
         public static Image ByteArrayToImage(byte[] byteArray)
