@@ -26,8 +26,7 @@ namespace ChristanCrush.Controllers
             int userId = int.Parse(HttpContext.Session.GetString("userId"));
             ProfileModel profile = new ProfileModel();
             profile = profileDao.GetProfileByUserId(userId);
-            //Debug.WriteLine(profile.ProfileId);
-
+            
             return View(profile);
         }
 
@@ -56,7 +55,7 @@ namespace ChristanCrush.Controllers
         /// the model to the view.
         /// </returns>
         [HttpPost]
-        public async Task<IActionResult> Create(ProfileModel profile)
+        public async Task<IActionResult> CreateProfile(ProfileModel profile)
         {
             ProfileDAO profileDAO = new ProfileDAO();
 

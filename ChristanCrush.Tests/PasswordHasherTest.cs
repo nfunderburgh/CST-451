@@ -29,7 +29,7 @@ namespace ChristanCrush.Tests
         /// password.
         /// </summary>
         [Fact]
-        public void VerifyPassword()
+        public void VerifyPassword_ShouldReturnTrue()
         {
             var passwordHasher = new PasswordHasher();
             string password = "securepassword";
@@ -45,7 +45,7 @@ namespace ChristanCrush.Tests
         /// password against a hashed password.
         /// </summary>
         [Fact]
-        public void VerifyPasswordWrong()
+        public void VerifyPassword_ShouldReturnFalse()
         {
             var passwordHasher = new PasswordHasher();
             string password = "securepassword";

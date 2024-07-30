@@ -50,6 +50,9 @@ namespace ChristanCrush.Controllers
                 userId = userDAO.FindUserIdByEmail(user);
                 HttpContext.Session.SetString("userId", userId.ToString());
 
+                int userid = int.Parse(HttpContext.Session.GetString("userId"));
+                Debug.Write("userid" + userid);
+
                 return RedirectToAction("Index", "Match");
             }
             else

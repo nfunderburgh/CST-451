@@ -9,7 +9,7 @@ namespace ChristanCrush.DataServices
 
         public bool InsertMatch(MatchModel match)
         {
-            string sqlStatement = "INSERT INTO Matches (UserId1, UserId2, MatchedAt, IsMatched) VALUES (@UserId1, @UserId2, @MatchedAt, @IsMatched)";
+            string sqlStatement = "INSERT INTO Matches (UserId1, UserId2, MatchedAt) VALUES (@UserId1, @UserId2, @MatchedAt)";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -17,7 +17,6 @@ namespace ChristanCrush.DataServices
                 cmd.Parameters.AddWithValue("@UserId1", match.UserId1);
                 cmd.Parameters.AddWithValue("@UserId2", match.UserId2);
                 cmd.Parameters.AddWithValue("@MatchedAt", match.MatchedAt.ToString("yyyy-MM-dd HH:mm:ss"));
-                cmd.Parameters.AddWithValue("@IsMatched", match.IsMatched);
 
                 try
                 {
@@ -54,9 +53,7 @@ namespace ChristanCrush.DataServices
                             {
                                 MatchId = Convert.ToInt32(reader["MatchId"]),
                                 UserId1 = Convert.ToInt32(reader["UserId1"]),
-                                UserId2 = Convert.ToInt32(reader["UserId2"]),
-                                MatchedAt = Convert.ToDateTime(reader["MatchedAt"]),
-                                IsMatched = Convert.ToBoolean(reader["IsAccepted"])
+                                UserId2 = Convert.ToInt32(reader["UserId2"])
                             };
                             matches.Add(match);
                         }

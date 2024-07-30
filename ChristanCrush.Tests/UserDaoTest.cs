@@ -74,7 +74,7 @@ namespace ChristanCrush.Tests
             {
                 first_name = "John",
                 last_name = "Doe",
-                email = "testuser@example.com",
+                email = "registerme@example.com",
                 password = "Password123$",
                 confirm_password = "Password123$",
                 date_of_birth = new DateTime(2015, 12, 31),
@@ -95,7 +95,7 @@ namespace ChristanCrush.Tests
             {
                 first_name = "John",
                 last_name = "Doe",
-                email = "testuser@example.com",
+                email = "registerme@example.com",
                 password = "Password123$",
                 confirm_password = "Password123$",
                 date_of_birth = new DateTime(2015, 12, 31),
@@ -118,7 +118,7 @@ namespace ChristanCrush.Tests
             {
                 first_name = "John",
                 last_name = "Doe",
-                email = "testuser@example.com",
+                email = "registerme@example.com",
                 password = "Password123$",
                 confirm_password = "Password123$",
                 date_of_birth = new DateTime(2015, 12, 31),

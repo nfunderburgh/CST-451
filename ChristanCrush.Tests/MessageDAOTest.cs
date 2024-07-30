@@ -13,12 +13,12 @@ namespace ChristanCrush.Tests
         private readonly MessageDAO MessageDao = new MessageDAO();
 
         [Fact]
-        public void InsertMessageShouldReturnTrue()
+        public void InsertMessage_ShouldReturnTrue()
         {
             var message = new MessageModel
             {
-                SenderId = 1,
-                ReceiverId = 2,
+                SenderId = 4,
+                ReceiverId = 5,
                 MessageContent = "Test message",
                 SentAt = DateTime.Now
             };
@@ -33,12 +33,12 @@ namespace ChristanCrush.Tests
         }
 
         [Fact]
-        public void DeleteMessage()
+        public void DeleteMessage_ShouldReturnTrue()
         {
             var message = new MessageModel
             {
-                SenderId = 1,
-                ReceiverId = 2,
+                SenderId = 4,
+                ReceiverId = 5,
                 MessageContent = "Test message",
                 SentAt = DateTime.Now
             };
@@ -52,23 +52,21 @@ namespace ChristanCrush.Tests
         }
 
         [Fact]
-        public void GetAllMessages_ShouldReturnMessages()
+        public void GetAllMessages()
         {
             // Arrange
             var message1 = new MessageModel
             {
-                MessageId = 100,
-                SenderId = 1,
-                ReceiverId = 2,
+                SenderId = 4,
+                ReceiverId = 5,
                 MessageContent = "Test message 1",
                 SentAt = DateTime.Now
             };
 
             var message2 = new MessageModel
             {
-                MessageId = 101,
-                SenderId = 2,
-                ReceiverId = 1,
+                SenderId = 5,
+                ReceiverId = 4,
                 MessageContent = "Test message 2",
                 SentAt = DateTime.Now
             };
@@ -93,16 +91,15 @@ namespace ChristanCrush.Tests
             // Arrange
             var message = new MessageModel
             {
-                SenderId = 1,
-                ReceiverId = 2,
+                SenderId = 4,
+                ReceiverId = 5,
                 MessageContent = "Test message",
                 SentAt = DateTime.Now
             };
 
             MessageDao.InsertMessage(message);
-            var messages = MessageDao.GetSenderReceiverMessages(1, 2);
+            var messages = MessageDao.GetSenderReceiverMessages(4, 5);
 
-            Assert.NotEmpty(messages);
             int messageId = MessageDao.GetMessageIdBySentAt(message.SentAt);
             Assert.NotEmpty(messages);
             MessageDao.DeleteMessage(messageId);

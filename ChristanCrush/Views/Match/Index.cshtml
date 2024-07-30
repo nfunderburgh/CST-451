@@ -9,28 +9,39 @@
     string image3Base64 = Model.Image3Data != null ? Convert.ToBase64String(Model.Image3Data) : null;
 }
 
+<script type="text/javascript">
+        window.onload = function() {
+            var message = '@TempData["MatchedMessage"]';
+            if (message) {
+                alert(message);
+            }
+        };
+    </script>
+
 <div class="container mt-5 d-flex justify-content-center">
         <div class="col-md-8 col-lg-6">
             <div class="card mb-4">
                 <div class="card-body">
                     <h5 class="card-title">@Model.FullName</h5>
-                    <div class="mb-3 image-container">
-                        @if (!string.IsNullOrEmpty(image1Base64))
-                        {
-                            <img src="data:image/jpeg;base64,@image1Base64" alt="Profile Image" class="img-fluid" />
-                        }
-                    </div>
-                    <div class="mb-3 image-container">
-                        @if (!string.IsNullOrEmpty(image2Base64))
-                        {
-                            <img src="data:image/jpeg;base64,@image2Base64" alt="Additional Image 1" class="img-fluid" />
-                        }
-                    </div>
-                    <div class="mb-3 image-container">
-                        @if (!string.IsNullOrEmpty(image3Base64))
-                        {
-                            <img src="data:image/jpeg;base64,@image3Base64" alt="Additional Image 2" class="img-fluid" />
-                        }
+                    <div class="d-flex flex-wrap">
+                        <div class="mb-3 image-container">
+                            @if (!string.IsNullOrEmpty(image1Base64))
+                            {
+                                <img src="data:image/jpeg;base64,@image1Base64" alt="Profile Image" class="img-fluid" />
+                            }
+                        </div>
+                        <div class="mb-3 image-container">
+                            @if (!string.IsNullOrEmpty(image2Base64))
+                            {
+                                <img src="data:image/jpeg;base64,@image2Base64" alt="Additional Image 1" class="img-fluid" />
+                            }
+                        </div>
+                        <div class="mb-3 image-container">
+                            @if (!string.IsNullOrEmpty(image3Base64))
+                            {
+                                <img src="data:image/jpeg;base64,@image3Base64" alt="Additional Image 2" class="img-fluid" />
+                            }
+                        </div>
                     </div>
                     <p class="card-text">@Model.Bio</p>
                     <p class="card-text">@Model.Hobbies</p>
