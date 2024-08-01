@@ -40,6 +40,10 @@ function setupImagePreview(inputId, previewId) {
     });
 }
 
+function confirmDelete() {
+    return confirm("Are you sure you want to delete this match? This action cannot be undone.");
+}
+
 // Initialize previews for multiple image inputs
 setupImagePreview('imageInput1', 'imagePreview1');
 setupImagePreview('imageInput2', 'imagePreview2');

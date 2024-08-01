@@ -32,30 +32,32 @@ namespace ChristanCrush.DataServices
             }
         }
 
-        public List<MatchModel> GetMatches(int userId)
+        public MatchModel GetMatch(int userId1, int userId2)
         {
-            List<MatchModel> matches = new List<MatchModel>();
-            string sqlStatement = "SELECT * FROM Matches WHERE UserId1 = @UserId OR UserId2 = @UserId";
+            MatchModel match = null; // Initialize as null
+            string sqlStatement = "SELECT * FROM Matches WHERE (UserId1 = @USERID1 AND UserId2 = @USERID2) OR (UserId1 = @USERID2 AND UserId2 = @USERID1) LIMIT 1";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 MySqlCommand cmd = new MySqlCommand(sqlStatement, connection);
-                cmd.Parameters.AddWithValue("@UserId", userId);
+                cmd.Parameters.AddWithValue("@USERID1", userId1);
+                cmd.Parameters.AddWithValue("@USERID2", userId2);
 
                 try
                 {
                     connection.Open();
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        while (reader.Read())
+                        if (reader.Read()) // Check if data is available
                         {
-                            MatchModel match = new MatchModel
+                            match = new MatchModel
                             {
                                 MatchId = Convert.ToInt32(reader["MatchId"]),
                                 UserId1 = Convert.ToInt32(reader["UserId1"]),
-                                UserId2 = Convert.ToInt32(reader["UserId2"])
+                                UserId2 = Convert.ToInt32(reader["UserId2"]),
+                                MatchedAt = Convert.ToDateTime(reader["MatchedAt"])
+                                                                      
                             };
-                            matches.Add(match);
                         }
                     }
                 }
@@ -65,7 +67,31 @@ namespace ChristanCrush.DataServices
                 }
             }
 
-            return matches;
+            return match;
         }
+
+        public bool DeleteMatchById(int matchId)
+        {
+            string sqlStatement = @"DELETE FROM Matches WHERE MatchId = @MATCHID";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                MySqlCommand cmd = new MySqlCommand(sqlStatement, connection);
+                cmd.Parameters.AddWithValue("@MATCHID", matchId);
+
+                try
+                {
+                    connection.Open();
+                    int result = cmd.ExecuteNonQuery();
+                    return result > 0;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+            }
+        }
+
     }
 }

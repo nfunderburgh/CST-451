@@ -113,6 +113,23 @@ namespace ChristanCrush.Controllers
             return View("Matches", ProfileDao.GetProfilesMatchedWithUser(userId));
         }
 
+
+        [CustomAuthorization]
+        public IActionResult deleteMatch(int matchUserId)
+        {
+
+            ProfileDAO ProfileDao = new ProfileDAO();
+            int userId = int.Parse(HttpContext.Session.GetString("userId"));
+
+            MatchDAO MatchDao = new MatchDAO();
+            var match = MatchDao.GetMatch(userId, matchUserId);
+
+            MatchDao.DeleteMatchById(match.MatchId);
+
+            return View("Matches", ProfileDao.GetProfilesMatchedWithUser(userId));
+        }
+
+        [CustomAuthorization]
         public static Image ByteArrayToImage(byte[] byteArray)
         {
             using (MemoryStream ms = new MemoryStream(byteArray))

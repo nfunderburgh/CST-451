@@ -74,5 +74,40 @@ namespace ChristanCrush.Tests
 
             LikeDao.DeleteLike(likeId);
         }
+
+        [Fact]
+        public void CheckIfLikeExists_ShouldReturnTrue()
+        {
+            var like = new LikeModel
+            {
+                LikerId = 4,
+                LikedId = 5,
+                LikedAt = DateTime.Now
+            };
+
+            int likeId = LikeDao.InsertLikeInt(like);
+
+            bool result = LikeDao.CheckIfLikeExists(like.LikerId, like.LikedId);
+
+            Assert.True(result);
+
+            LikeDao.DeleteLike(likeId);
+        }
+
+        [Fact]
+        public void CheckIfLikeExists_ShouldReturnFalse()
+        {
+            var like = new LikeModel
+            {
+                LikerId = -1,
+                LikedId = -1,
+                LikedAt = DateTime.Now
+            };
+
+            bool result = LikeDao.CheckIfLikeExists(like.LikerId, like.LikedId);
+
+            Assert.False(result);
+        }
+
     }
 }
