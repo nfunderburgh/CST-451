@@ -17,11 +17,11 @@
     background-color: #555;
 }
 .form-group {
-    margin-bottom: 1rem; /* Default margin */
+    margin-bottom: 1rem;
 }
 
     .form-group.error {
-        margin-bottom: 0; /* No margin when there's an error */
+        margin-bottom: 0;
     }
 
 
@@ -46,15 +46,27 @@
     flex: 1;
 }
 
-#imagesform {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
 .image-container img {
     max-height: 300px;
     object-fit: cover;
     display: block;
     margin: 0 auto;
+}
+
+.profile-image-container {
+    width: 32%;
+    height: auto;
+}
+
+.profile-image-container img {
+    max-height: 300px;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+}
+
+#imagesform {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }

@@ -13,7 +13,7 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <!-- IMAGES -->
         <div id="imagesform">
-            <div class="image-container">
+            <div class="profile-image-container">
                 <div class="form-group mb-2">
                     <label asp-for="Image1" class="control-label"></label>
                     <input asp-for="Image1" type="file" class="form-control" id="imageInput1" />
@@ -24,7 +24,7 @@
                     <img id="imagePreview1" src="#" alt="Image 1 Preview" style="display: none; max-width: 100%; height: auto;" />
                 </div>
             </div>
-            <div class="image-container">
+            <div class="profile-image-container">
                 <div class="form-group mb-2">
                     <label asp-for="Image2" class="control-label"></label>
                     <input asp-for="Image2" type="file" class="form-control" id="imageInput2" />
@@ -34,7 +34,7 @@
                     <img id="imagePreview2" src="#" alt="Image 2 Preview" style="display: none; max-width: 100%; height: auto;" />
                 </div>
             </div>
-            <div class="image-container">
+            <div class="profile-image-container">
                 <div class="form-group mb-2">
                     <label asp-for="Image3" class="control-label"></label>
                     <input asp-for="Image3" type="file" class="form-control" id="imageInput3" />
@@ -45,7 +45,6 @@
                 </div>
             </div>
         </div>
-        <!-- INSERTED TEXT -->
         <div class="form-group mb-3">
             <label asp-for="Bio" class="control-label"></label>
             <textarea asp-for="Bio" class="form-control" placeholder="Tell us a little about yourself..."></textarea>

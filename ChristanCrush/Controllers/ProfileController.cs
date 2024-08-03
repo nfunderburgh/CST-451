@@ -78,7 +78,7 @@ namespace ChristanCrush.Controllers
                 if (profileDAO.InsertProfile(profile))
                 {
                     Debug.WriteLine("Inserted Profile");
-                    return View("index", profile);
+                    return View("ProfileSuccess", profile);
                 }
                 else
                 {

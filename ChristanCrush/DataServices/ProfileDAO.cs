@@ -250,5 +250,44 @@ namespace ChristanCrush.DataServices
 
             return profiles;
         }
+
+        public bool DeleteProfile(int profileId)
+        {
+            bool success = false;
+
+            string sqlStatement = "DELETE FROM profiles WHERE PROFILEID = @PROFILEID";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(sqlStatement, connection))
+                {
+                    cmd.Parameters.AddWithValue("@PROFILEID", profileId);
+
+                    try
+                    {
+                        connection.Open();
+                        int result = cmd.ExecuteNonQuery();
+
+                        if (result > 0)
+                        {
+                            success = true;
+                        }
+                        else
+                        {
+                            Debug.WriteLine("Error deleting profile from database!");
+                            success = false;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        success = false;
+                    }
+                }
+            }
+
+            return success;
+        }
+
     }
 }

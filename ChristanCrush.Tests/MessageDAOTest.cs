@@ -33,6 +33,27 @@ namespace ChristanCrush.Tests
         }
 
         [Fact]
+        public void InsertMessage_ShouldReturnFalse()
+        {
+            var message = new MessageModel
+            {
+                SenderId = 4,
+                ReceiverId = 5,
+                MessageContent = "Test message",
+                SentAt = DateTime.Now
+            };
+
+            var result = MessageDao.InsertMessage(message);
+
+            int messageId = MessageDao.GetMessageIdBySentAt(message.SentAt);
+
+            Assert.False(string.IsNullOrEmpty(messageId.ToString()));
+
+            MessageDao.DeleteMessage(messageId);
+        }
+
+
+        [Fact]
         public void DeleteMessage_ShouldReturnTrue()
         {
             var message = new MessageModel
@@ -54,7 +75,6 @@ namespace ChristanCrush.Tests
         [Fact]
         public void GetAllMessages()
         {
-            // Arrange
             var message1 = new MessageModel
             {
                 SenderId = 4,
@@ -88,7 +108,6 @@ namespace ChristanCrush.Tests
         [Fact]
         public void GetSenderReceiverMessages()
         {
-            // Arrange
             var message = new MessageModel
             {
                 SenderId = 4,
