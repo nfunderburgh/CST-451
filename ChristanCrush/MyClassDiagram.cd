@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ChristanCrush.Controllers.HomeController">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAIAAAAQAAAAEQAAAAAAA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChristanCrush.Controllers.LoginController">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAACACAAAAAIAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\LoginController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChristanCrush.Controllers.MatchController">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAIIAAQAAAAACAAAAAAAAAAABAAAAAAAEAAAADAAo=</HashCode>
+      <FileName>Controllers\MatchController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChristanCrush.Controllers.MessageController">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAICAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\MessageController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChristanCrush.Controllers.ProfileController">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAACAAAAAAAAAAAAAAAAAAAEQQAAAAAA=</HashCode>
+      <FileName>Controllers\ProfileController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChristanCrush.Controllers.RegisterController">
+    <Position X="4" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAABAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\RegisterController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChristanCrush.DataServices.DBConnection">
+    <Position X="2.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataServices\DBConnection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChristanCrush.DataServices.LikeDAO">
+    <Position X="9.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CCAAAAAAAgAAAAAAAAAAAAQAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>DataServices\LikeDAO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChristanCrush.DataServices.MatchDAO">
+    <Position X="7.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataServices\MatchDAO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChristanCrush.DataServices.ProfileDAO">
+    <Position X="5.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAEAAAAAAAAAAABAAAAAAAAEIAAAAAAAAAAI=</HashCode>
+      <FileName>DataServices\ProfileDAO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChristanCrush.DataServices.UserDAO">
+    <Position X="2.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAACAAAAAAAAAAABAUAAAAAAAAAAAAACA=</HashCode>
+      <FileName>DataServices\UserDAO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChristanCrush.Services.MessageDAO">
+    <Position X="11" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAIAAAAAAAAAAQAAAAAAgAAAAAAAAAACAAAA=</HashCode>
+      <FileName>DataServices\MessageDAO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChristanCrush.Utility.CustomAuthorizationAttribute" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utility\CustomAuthorization.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ChristanCrush.Utility.PasswordHasher">
+    <Position X="12.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utility\PasswordHasher.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChristanCrush.Utility.PasswordValidation">
+    <Position X="12.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Utility\PasswordValidation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChristanCrush.Services.LikeService">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CCAAAAAAAgAAACBAAAAAAAQAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\LikeService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChristanCrush.Services.MatchService">
+    <Position X="7.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAoBAAAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\MatchService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChristanCrush.Services.MessageService">
+    <Position X="11" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAIAAAABAAAAAQAAAAAAgBAAAAAAAAACAAAA=</HashCode>
+      <FileName>Services\MessageService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChristanCrush.Services.ProfileService">
+    <Position X="5.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAEAAAABAAAAAABAAAAgAAAEIAAAAAAAAAAI=</HashCode>
+      <FileName>Services\ProfileService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChristanCrush.Services.UserService">
+    <Position X="4" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAACBAAAAAAgAAABAUAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Services\UserService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

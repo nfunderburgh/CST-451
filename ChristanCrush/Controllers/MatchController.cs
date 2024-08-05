@@ -1,5 +1,6 @@
 ﻿using ChristanCrush.DataServices;
 using ChristanCrush.Models;
+using ChristanCrush.Services;
 using ChristanCrush.Utility;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -9,35 +10,30 @@ namespace ChristanCrush.Controllers
 {
     public class MatchController : Controller
     {
-        
-        /// <summary>
-        /// The Index function in C# is decorated with a CustomAuthorization attribute and returns a
-        /// View result.
-        /// </summary>
-        /// <returns>
-        /// A View is being returned from the Index action method.
-        /// </returns>
+        UserService userService = new UserService();
+        ProfileService profileService = new ProfileService();
+        LikeService likeService = new LikeService();
+        MatchService matchService = new MatchService();
+
         [CustomAuthorization]
         public IActionResult Index()
         {
             ProfileModel profile = new ProfileModel();
-            ProfileDAO ProfileDao = new ProfileDAO();
-            UserDAO UserDao = new UserDAO();
 
             int userId = int.Parse(HttpContext.Session.GetString("userId"));
-            profile = ProfileDao.GetProfileByUserId(userId);
+            profile = profileService.GetProfileByUserId(userId);
 
 
             if (profile != null)
             {
-                profile = ProfileDao.GetRandomProfile(userId);
+                profile = profileService.GetRandomProfile(userId);
                 if (profile == null)
                 {
                     return View("NoProfiles");
                 }
                 else
                 {
-                    profile.FullName = UserDao.GetUserNameByUserId(profile.UserId);
+                    profile.FullName = userService.GetUserNameByUserId(profile.UserId);
                     return View(profile);
                 }
             }
@@ -58,13 +54,11 @@ namespace ChristanCrush.Controllers
         [CustomAuthorization]
         public IActionResult LikeProfile(int profileId)
         {
-            LikeDAO likeDao = new LikeDAO();
-            ProfileDAO ProfileDao = new ProfileDAO();
 
-            var profile = ProfileDao.GetProfileByProfileId(profileId);
+            var profile = profileService.GetProfileByProfileId(profileId);
             int LoggedInUserId = int.Parse(HttpContext.Session.GetString("userId"));
 
-            if (!likeDao.CheckIfLikeExists(LoggedInUserId, profile.UserId))
+            if (!likeService.CheckIfLikeExists(LoggedInUserId, profile.UserId))
             {
                 var like = new LikeModel
                 {
@@ -73,23 +67,22 @@ namespace ChristanCrush.Controllers
                     LikedAt = DateTime.Now
                 };
 
-                likeDao.InsertLike(like);
+                likeService.InsertLike(like);
 
-                if(likeDao.CheckIfMutualLikeExists(LoggedInUserId, profile.UserId)){
+                if(likeService.CheckIfMutualLikeExists(LoggedInUserId, profile.UserId)){
 
-                    UserDAO UserDao = new UserDAO();
-                    profile.FullName = UserDao.GetUserNameByUserId(profile.UserId);
+                    profile.FullName = userService.GetUserNameByUserId(profile.UserId);
                     insertMatch(LoggedInUserId, profile.UserId);
                     TempData["MatchedMessage"] = "You have matched with " + profile.FullName + "!";
                     
-                    // TODO:
-                    // Delete Likes in database
+                    
                 }
             }
 
             return RedirectToAction("Index");
         }
 
+        [CustomAuthorization]
         private void insertMatch(int loggedInUserId, int userId)
         {
             MatchDAO MatchDao = new MatchDAO();
@@ -100,33 +93,29 @@ namespace ChristanCrush.Controllers
                 MatchedAt = DateTime.Now
             };
 
-            MatchDao.InsertMatch(match);
+            matchService.InsertMatch(match);
         }
 
         [CustomAuthorization]
         public IActionResult ViewMatches()
         {
-            ProfileDAO ProfileDao = new ProfileDAO();
             int userId = int.Parse(HttpContext.Session.GetString("userId"));
 
-
-            return View("Matches", ProfileDao.GetProfilesMatchedWithUser(userId));
+            return View("Matches", profileService.GetProfilesMatchedWithUser(userId));
         }
 
 
         [CustomAuthorization]
         public IActionResult deleteMatch(int matchUserId)
         {
-
-            ProfileDAO ProfileDao = new ProfileDAO();
             int userId = int.Parse(HttpContext.Session.GetString("userId"));
 
             MatchDAO MatchDao = new MatchDAO();
-            var match = MatchDao.GetMatch(userId, matchUserId);
+            var match = matchService.GetMatch(userId, matchUserId);
 
-            MatchDao.DeleteMatchById(match.MatchId);
+            matchService.DeleteMatchById(match.MatchId);
 
-            return View("Matches", ProfileDao.GetProfilesMatchedWithUser(userId));
+            return View("Matches", profileService.GetProfilesMatchedWithUser(userId));
         }
 
         [CustomAuthorization]

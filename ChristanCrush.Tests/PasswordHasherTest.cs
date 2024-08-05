@@ -5,10 +5,7 @@ namespace ChristanCrush.Tests
 {
     public class PasswordHasherTest
     {
-        /// <summary>
-        /// The HashPassword function tests the hashing of a password using a PasswordHasher class in
-        /// C#.
-        /// </summary>
+
         [Fact]
         public void HashPassword()
         {
@@ -24,10 +21,6 @@ namespace ChristanCrush.Tests
             Assert.Equal(48, hashedPasswordBytes.Length);
         }
 
-        /// <summary>
-        /// The function verifies a password by hashing it and then comparing it with the hashed
-        /// password.
-        /// </summary>
         [Fact]
         public void VerifyPassword_ShouldReturnTrue()
         {
@@ -40,10 +33,6 @@ namespace ChristanCrush.Tests
             Assert.True(result);
         }
 
-        /// <summary>
-        /// The function VerifyPasswordWrong tests the PasswordHasher class by verifying an incorrect
-        /// password against a hashed password.
-        /// </summary>
         [Fact]
         public void VerifyPassword_ShouldReturnFalse()
         {

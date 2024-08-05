@@ -5,139 +5,158 @@ namespace ChristanCrush.DataServices
 {
     public class LikeDAO
     {
-        String connectionString = "Server=localhost;User ID=root;Password=root;Database=CST_451;";
 
-        public bool InsertLike(LikeModel like)
+        public bool InsertLike(LikeModel like, MySqlConnection dbConnection)
         {
             string sqlStatement = "INSERT INTO Likes (likerid, likedid, likedat) VALUES (@LIKERID, @LIKEDID, @LIKEDAT)";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            MySqlCommand cmd = new MySqlCommand(sqlStatement, dbConnection);
+
+            cmd.Parameters.AddWithValue("@LIKERID", like.LikerId);
+            cmd.Parameters.AddWithValue("@LIKEDID", like.LikedId);
+            cmd.Parameters.AddWithValue("@LIKEDAT", like.LikedAt);
+
+            try
             {
-                MySqlCommand cmd = new MySqlCommand(sqlStatement, connection);
-
-                cmd.Parameters.AddWithValue("@LIKERID", like.LikerId);
-                cmd.Parameters.AddWithValue("@LIKEDID", like.LikedId);
-                cmd.Parameters.AddWithValue("@LIKEDAT", like.LikedAt);
-
-                try
+                dbConnection.Open();
+                int result = cmd.ExecuteNonQuery();
+                return result > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            finally
+            {
+                if (dbConnection.State == System.Data.ConnectionState.Open)
                 {
-                    connection.Open();
-                    int result = cmd.ExecuteNonQuery();
-                    return result > 0;
+                    dbConnection.Close();
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    return false;
-                }
-                
             }
         }
 
-        public int InsertLikeInt(LikeModel like)
+        public int InsertLikeInt(LikeModel like, MySqlConnection dbConnection)
         {
             string sqlStatement = "INSERT INTO Likes (LikerId, LikedId, LikedAt) VALUES (@LIKERID, @LIKEDID, @LIKEDAT)";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            MySqlCommand cmd = new MySqlCommand(sqlStatement, dbConnection);
+
+            cmd.Parameters.AddWithValue("@LIKERID", like.LikerId);
+            cmd.Parameters.AddWithValue("@LIKEDID", like.LikedId);
+            cmd.Parameters.AddWithValue("@LIKEDAT", like.LikedAt);
+
+            try
             {
-                MySqlCommand cmd = new MySqlCommand(sqlStatement, connection);
+                dbConnection.Open();
+                int result = cmd.ExecuteNonQuery();
 
-                cmd.Parameters.AddWithValue("@LIKERID", like.LikerId);
-                cmd.Parameters.AddWithValue("@LIKEDID", like.LikedId);
-                cmd.Parameters.AddWithValue("@LIKEDAT", like.LikedAt);
-
-                try
+                if (result > 0)
                 {
-                    connection.Open();
-                    int result = cmd.ExecuteNonQuery();
-
-                    if (result > 0)
-                    {
-                        return (int)cmd.LastInsertedId;
-                    }
-                    else
-                    {
-                        return -1;
-                    }
+                    return (int)cmd.LastInsertedId;
                 }
-                catch (Exception ex)
+                else
                 {
-                    Console.WriteLine(ex.Message);
                     return -1;
                 }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return -1;
+            }
+            finally
+            {
+                if (dbConnection.State == System.Data.ConnectionState.Open)
+                {
+                    dbConnection.Close();
+                }
+            }
+
         }
 
-        public bool CheckIfMutualLikeExists(int userId1, int userId2)
+        public bool CheckIfMutualLikeExists(int userId1, int userId2, MySqlConnection dbConnection)
         {
             string sqlStatement = "SELECT COUNT(*) FROM Likes WHERE(LikerId = @UserId1 AND LikedId = @UserId2) OR(LikerId = @UserId2 AND LikedId = @UserId1)";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            MySqlCommand cmd = new MySqlCommand(sqlStatement, dbConnection);
+
+            cmd.Parameters.AddWithValue("@UserId1", userId1);
+            cmd.Parameters.AddWithValue("@UserId2", userId2);
+
+            try
             {
-                MySqlCommand cmd = new MySqlCommand(sqlStatement, connection);
-
-                cmd.Parameters.AddWithValue("@UserId1", userId1);
-                cmd.Parameters.AddWithValue("@UserId2", userId2);
-
-                try
+                dbConnection.Open();
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+                return count > 1;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            finally
+            {
+                if (dbConnection.State == System.Data.ConnectionState.Open)
                 {
-                    connection.Open();
-                    int count = Convert.ToInt32(cmd.ExecuteScalar());
-                    return count > 1;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    return false;
+                    dbConnection.Close();
                 }
             }
         }
 
-        public bool DeleteLike(int likeId)
+        public bool DeleteLike(int likeId, MySqlConnection dbConnection)
         {
             string sqlStatement = "DELETE FROM likes WHERE LikeId = @LikeId";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
-            {
-                MySqlCommand cmd = new MySqlCommand(sqlStatement, connection);
-                
-                cmd.Parameters.AddWithValue("@LikeId", likeId);
+            MySqlCommand cmd = new MySqlCommand(sqlStatement, dbConnection);
 
-                try
+            cmd.Parameters.AddWithValue("@LikeId", likeId);
+
+            try
+            {
+                dbConnection.Open();
+                int rowsAffected = cmd.ExecuteNonQuery();
+                return rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            finally
+            {
+                if (dbConnection.State == System.Data.ConnectionState.Open)
                 {
-                    connection.Open();
-                    int rowsAffected = cmd.ExecuteNonQuery();
-                    return rowsAffected > 0;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    return false;
+                    dbConnection.Close();
                 }
             }
         }
 
-        public bool CheckIfLikeExists(int likerId, int likedId)
+        public bool CheckIfLikeExists(int likerId, int likedId, MySqlConnection dbConnection)
         {
             string sqlStatement = @"SELECT COUNT(*) FROM Likes WHERE LikerId = @LikerId AND LikedId = @LikedId";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            MySqlCommand cmd = new MySqlCommand(sqlStatement, dbConnection);
+
+            cmd.Parameters.AddWithValue("@LikerId", likerId);
+            cmd.Parameters.AddWithValue("@LikedId", likedId);
+
+            try
             {
-                MySqlCommand cmd = new MySqlCommand(sqlStatement, connection);
-
-                cmd.Parameters.AddWithValue("@LikerId", likerId);
-                cmd.Parameters.AddWithValue("@LikedId", likedId);
-
-                try
+                dbConnection.Open();
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+                return count > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            finally
+            {
+                if (dbConnection.State == System.Data.ConnectionState.Open)
                 {
-                    connection.Open();
-                    int count = Convert.ToInt32(cmd.ExecuteScalar());
-                    return count > 0;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    return false;
+                    dbConnection.Close();
                 }
             }
         }
